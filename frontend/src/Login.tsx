@@ -1,113 +1,3 @@
-/* import React, { useState } from "react";
-import "./Login.css";
-
-function Login() {
-  // States
-  const [errorMessages, setErrorMessages] = useState<{ name: string, message: string }>({ //hataları ve mesajları içeren nesne
-    name: '',
-    message: ''
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);//formun gönderilip gönderilmediğini kontrol etmek için nesne
-  const [rememberMe, setRememberMe] = useState(false);//remember me seçeneğinin durumunu tutmak için oluşturulan nesne
-
-  //kontrol edilecek database dizisi
-  const database = [
-    {
-      usereMail: "user1",
-      password: "pass1"
-    },
-    {
-      usereMail: "user2",
-      password: "pass2"
-    }
-  ];
-
-  const errors = {
-    emaill: "invalid email",
-    pass: "invalid password"
-  };
-
-  //formun gönderilmesi
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    //sayfa yenilenmesini engeller
-    event.preventDefault();
-
-    var { email, pass } = document.forms[0];//formdan email ve şifre alınır
-
-    // databaseden giriş bilgileri bulunur
-    const userData = database.find((user) => user.usereMail === email.value);
-
-    // kullanıcı bilgilerini karşılaştırır
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // şifre geçersizse
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-      }
-    } else {
-      // kullanıcı adı bulunamazsa
-      setErrorMessages({ name: "emaill", message: errors.emaill });
-    }
-  };
-
-  // hata mesajı
-  const renderErrorMessage = (name: string) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
-
-  // login formu JSX
-  const renderForm = (
-    <div className="form"> 
-    
-
-      <form onSubmit={handleSubmit}>
-        <div className="input-container" style={{color: "white" }}>  
-          <label>Email </label>
-          <input type="text" name="emaill" placeholder="Enter email" required />
-          {renderErrorMessage("emaill")} 
-        </div>
-        <div className="input-container" style={{color: "white"}}>
-          <label>Password </label>
-          <input type="password" name="pass" placeholder="Enter password" required />
-          {renderErrorMessage("pass")}
-        </div>
-        <div className="input-container" style={{color: "white"}}>
-          <label>
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={() => setRememberMe(!rememberMe)}
-            />
-            Remember me
-          </label>
-        </div>
-        <div className="button-container">
-          <input type="submit"  />
-        </div>
-      </form>
-    </div>
-  );
-
-  return (
-    <div className="app">
-      <div className="login-form">
-        <div className="title" style={{color: "white", textAlign:"center"}} >Login</div>
-        {isSubmitted ? (
-          <div>Admin is successfully logged in</div>
-        ) : (
-          renderForm
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default Login;
-
- */
-
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -122,14 +12,15 @@ import LoginIcon from '@mui/icons-material/Login';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import StickyFooter from './StickyFooter';
 import { useNavigate } from "react-router-dom";
-import {useState} from 'react';
+import { useState } from 'react';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 
-/* function Copyright(props: any) {
+function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" color="text.secondary" align="center" {...props} sx={{ margin: 5 }}>
       {'Copyright © '}
       <Link color="inherit" href="https://www.t2.com.tr">
         T2 Yazılım
@@ -138,11 +29,13 @@ import {useState} from 'react';
       {'.'}
     </Typography>
   );
-} */
-
-const defaultTheme = createTheme();
+}
 
 export default function SignIn() {
+
+  // state showing error message:
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   let navigate = useNavigate();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -151,7 +44,7 @@ export default function SignIn() {
       username: data.get('email'),
       password: data.get('password'),
     };
-    console.log(requestBody);
+    //console.log(requestBody);
 
     try {
       const response = await fetch('http://localhost:8080/api/login', {
@@ -165,15 +58,21 @@ export default function SignIn() {
 
       if (response.status === 401) {
         console.log('Authentication failed: Invalid credentials');
+        setErrorMessage("Lütfen kullanıcı adı ve şifrenizi kontrol ediniz.");
       } else if (!response.ok) {
         console.log(`Error! status: ${response.status}`);
+        setErrorMessage("Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyiniz.");
       }
       else {
-          navigate('/admin/users');
+        setErrorMessage("");
+        const responseData = await response.text();
+        // Save the token to sessionStorage
+        sessionStorage.setItem('token', responseData);
+        console.log(responseData);
+        console.log("tokennnnn:");
+        console.log(sessionStorage.getItem('token'));
+        navigate('/admin/users');
       }
-
-      //const result = await response.json();
-      //sessionStorage.setItem('token', result);
     } catch (e) {
       console.log('Error', e);
     }
@@ -245,18 +144,12 @@ export default function SignIn() {
                   Şifremi Unuttum
                 </Link>
               </Grid>
-              {/* <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid> */}
             </Grid>
           </Box>
+          {errorMessage !== "" && <Alert sx={{ margin: 4 }} severity="error"><AlertTitle>Giriş Hatası</AlertTitle>{errorMessage}</Alert>}
+          <Copyright />
         </Box>
-
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
-
     </ThemeProvider>
   );
 }

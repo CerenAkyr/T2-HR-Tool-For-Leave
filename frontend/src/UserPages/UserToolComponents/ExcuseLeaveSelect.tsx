@@ -39,13 +39,14 @@ export default function SelectExcuseLeave() {
       <MenuItem value=""sx={{width:200}}>
         <em>-</em>
       </MenuItem>
-      <MenuItem value="sick" style={{border: "1px solid #b3cae7" }}>Hastalık</MenuItem>
-      <MenuItem value="vacation"style={{border: "1px solid #b3cae7" }}>Tatil</MenuItem>
-      <MenuItem value="personal"style={{border: "1px solid #b3cae7" }}>Kişisel</MenuItem>
-      <MenuItem value="family"style={{border: "1px solid #b3cae7" }}>Aile</MenuItem>
-      <MenuItem value="bereavement" style={{border: "1px solid #b3cae7" }}>Yas</MenuItem>
-      <MenuItem value="maternity"style={{border: "1px solid #b3cae7" }}>Doğum</MenuItem>
-      <MenuItem value="other"style={{border: "1px solid #b3cae7" }}>Diğer</MenuItem>
+      <MenuItem value="yillik" style={{border: "1px solid #b3cae7" }}>Yıllık İzin</MenuItem>
+      <MenuItem value="mahsup"style={{border: "1px solid #b3cae7" }}>Mahsup İzin</MenuItem>
+      <MenuItem value="mazeret"style={{border: "1px solid #b3cae7" }}>Mazeret İzni</MenuItem>
+      <MenuItem value="ucretsiz"style={{border: "1px solid #b3cae7" }}>Ücretsiz İzin</MenuItem>
+      <MenuItem value="hastalik" style={{border: "1px solid #b3cae7" }}>Hastalık</MenuItem>
+      <MenuItem value="dogum"style={{border: "1px solid #b3cae7" }}>Doğum Sonrası</MenuItem>
+      <MenuItem value="olum"style={{border: "1px solid #b3cae7" }}>Ölüm İzni</MenuItem>
+      <MenuItem value="diger"style={{border: "1px solid #b3cae7" }}>Diğer</MenuItem>
     </Select>
     </FormControl>
     </div>)

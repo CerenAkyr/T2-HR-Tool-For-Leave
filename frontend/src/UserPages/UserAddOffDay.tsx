@@ -9,7 +9,7 @@ import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import SideBar from '../AdminPages/AdminNavigation/SideBar';
-
+import TextField from '@mui/material/TextField';
 
 function UserAddOffDay() {
   return (
@@ -45,7 +45,8 @@ function UserAddOffDay() {
       
       
       </Grid>
-      
+      <TextField id="reasoning" label="İzin Gerekçesi" variant="outlined" sx={{margin: 4, width: 400}} multiline
+          rows={4}/>
       <IconLabelButtons  />
         </Box>
         
