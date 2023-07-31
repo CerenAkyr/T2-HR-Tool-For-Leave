@@ -2,9 +2,11 @@ package tr.com.t2.ik.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import tr.com.t2.ik.model.Personnel;
 import tr.com.t2.ik.repository.PersonnelRepository;
+import tr.com.t2.ik.security.service.T2UserDetailsService;
 import tr.com.t2.ik.ws.dto.PersonnelDto;
 import tr.com.t2.ik.ws.dto.PersonnelResponseDTO;
 
@@ -12,19 +14,26 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
-@PreAuthorize("hasRole('ROLE_USER')")
 public class UserController {
 
     @Autowired
     private PersonnelRepository personnelRepository;
+    private T2UserDetailsService personnelService;
 
-    @GetMapping
+    @GetMapping("api/users")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @CrossOrigin
     public List<PersonnelDto> getMethod() {
-        //<UserListDTO> personnelOptional = personnelRepository.findAllPersonnelDto();
-        return personnelRepository.findAllPersonnelDto();
+        return personnelService.getAllUsers();
     }
+
+    @GetMapping("api/user/role")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @CrossOrigin
+    public boolean isAdmin() {
+        return true;
+    }
+
 
     @GetMapping
     @RequestMapping("/{username}")

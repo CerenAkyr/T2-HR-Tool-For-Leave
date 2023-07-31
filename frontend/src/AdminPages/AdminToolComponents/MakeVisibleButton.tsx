@@ -17,24 +17,21 @@ function MakeVisibleButton({ status }: props) {
     const handleClose = () => setShow(false);
 
     const makeVisibleHandler = () => {
-        setShow(true);
+        // ToDo: görünür yap
+        console.log("görünür yap");
+        setShow(false);
     }
 
-    // mouse ile üstüne gelince yazı göstermek için:
-    const [isHovered, setIsHovered] = useState<boolean>(false);
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
+    const makeInvisibleHandler = () => {
+        // ToDo: görünmez yap
+        console.log("görünmez yap");
+        setShow(false);
+    }
 
     return (
         <>
             <Tooltip title={status === "Aktif" ? "Pasif hale getir" : "Aktif hale getir"} placement='bottom'>
-                <VisibilityOffIcon className="request__button" onClick={makeVisibleHandler}
+                <VisibilityOffIcon className="request__button" onClick={() => setShow(true)}
                 >Make Visible</VisibilityOffIcon>
             </Tooltip>
             {status === "Aktif" &&
@@ -44,14 +41,14 @@ function MakeVisibleButton({ status }: props) {
                     keyboard={false}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>Kullanıcıyı Görnmez Yapma</Modal.Title>
+                        <Modal.Title>Kullanıcıyı Görünmez Yapma</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         Bu kullanıcıyı görünmez yapmak istediğinize emin misiniz?
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>Hayır</Button>
-                        <Button variant="primary" onClick={makeVisibleHandler}>Evet</Button>
+                        <Button variant="primary" onClick={makeInvisibleHandler}>Evet</Button>
                     </Modal.Footer>
                 </Modal>
             }

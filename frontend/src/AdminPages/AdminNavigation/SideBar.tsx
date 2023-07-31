@@ -117,7 +117,7 @@ function SideBar() {
                 {sidebarItems.map((item: MenuItem) =>
                     item.role === "admin" ? (userRole === "admin" &&
                         (isOpen ?
-                            (<a href={item.link}>
+                            (<a href={item.link} key={item.link}>
                                 <ListItem className="sidebar__items">
                                     <ListItemAvatar>
                                         <Avatar className="sidebar__avatar">
@@ -128,7 +128,7 @@ function SideBar() {
                                 </ListItem>
                                 <Divider variant="inset" component="li" className="sidebar__divider" />
                             </a>)
-                            : (<Tooltip title={item.title} placement="right">
+                            : (<Tooltip title={item.title} placement="right"  key={item.link}>
                                 <a href={item.link}>
                                     <ListItem className="sidebar__items">
                                         <ListItemAvatar>
@@ -144,7 +144,7 @@ function SideBar() {
                         ))
                         :
                         (isOpen ?
-                            (<a href={item.link}>
+                            (<a href={item.link} key={item.link}>
                                 <ListItem className="sidebar__items">
                                     <ListItemAvatar>
                                         <Avatar className="sidebar__avatar">
@@ -155,7 +155,7 @@ function SideBar() {
                                 </ListItem>
                                 <Divider variant="inset" component="li" className="sidebar__divider" />
                             </a>)
-                            : (<Tooltip title={item.title} placement="right">
+                            : (<Tooltip title={item.title} placement="right"  key={item.link}>
                                 <a href={item.link}>
                                     <ListItem className="sidebar__items">
                                         <ListItemAvatar>

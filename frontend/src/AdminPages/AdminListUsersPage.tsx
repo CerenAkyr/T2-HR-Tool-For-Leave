@@ -7,25 +7,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import FilterUsers from "./AdminToolComponents/FilterUsers";
 import { useState, useEffect } from 'react';
 import StickyFooter from "../StickyFooter";
 import SideBar from "./AdminNavigation/SideBar";
-
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://www.t2.com.tr">
-        T2 YAZILIM
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 function AdminListUsersPage() {
 
@@ -62,6 +48,7 @@ function AdminListUsersPage() {
   const fetchData = async () => {
     try {
       const token = sessionStorage.getItem('token'); // Replace this with your actual token
+      console.log(token);
       setIsLoading(true);
       const response = await fetch('http://localhost:8080/api/users', {
         method: 'GET',

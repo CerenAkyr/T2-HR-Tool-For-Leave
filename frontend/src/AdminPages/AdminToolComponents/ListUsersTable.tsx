@@ -42,7 +42,7 @@ function ListUsersTable( { users }: UserProps ) {
                     <TableBody>
                         {users && users.length > 0 && users.map((row: User) => (
                             <TableRow
-                                key={row.email}
+                                key={row.username}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell align="center" component="th" scope="row">
