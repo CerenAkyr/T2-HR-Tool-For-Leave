@@ -5,7 +5,11 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Tooltip from '@mui/material/Tooltip';
 
-function MakeVisibleButton() {
+type props = {
+    status: string
+}
+
+function MakeVisibleButton({ status }: props) {
 
     // state to show modal:
     const [show, setShow] = useState(false);
@@ -29,26 +33,46 @@ function MakeVisibleButton() {
 
     return (
         <>
-            <Tooltip title="Pasif hale getir" placement='bottom'>
+            <Tooltip title={status === "Aktif" ? "Pasif hale getir" : "Aktif hale getir"} placement='bottom'>
                 <VisibilityOffIcon className="request__button" onClick={makeVisibleHandler}
                 >Make Visible</VisibilityOffIcon>
             </Tooltip>
-            <Modal
-                show={show}
-                onHide={handleClose}
-                keyboard={false}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Kullanıcıyı Görnmez Yapma</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Bu kullanıcıyı görünmez yapmak istediğinize emin misiniz?
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={makeVisibleHandler}>Hayır</Button>
-                    <Button variant="primary" onClick={makeVisibleHandler}>Evet</Button>
-                </Modal.Footer>
-            </Modal>
+            {status === "Aktif" &&
+                <Modal
+                    show={show}
+                    onHide={handleClose}
+                    keyboard={false}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Kullanıcıyı Görnmez Yapma</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Bu kullanıcıyı görünmez yapmak istediğinize emin misiniz?
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>Hayır</Button>
+                        <Button variant="primary" onClick={makeVisibleHandler}>Evet</Button>
+                    </Modal.Footer>
+                </Modal>
+            }
+            {status === "Pasif" &&
+                <Modal
+                    show={show}
+                    onHide={handleClose}
+                    keyboard={false}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Kullanıcıyı Görünür Yapma</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Bu kullanıcıyı görünür yapmak istediğinize emin misiniz?
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>Hayır</Button>
+                        <Button variant="primary" onClick={makeVisibleHandler}>Evet</Button>
+                    </Modal.Footer>
+                </Modal>
+            }
         </>
     )
 }
