@@ -55,7 +55,6 @@ function AdminListUsersPage() {
   // to show loading animation:
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  /*
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true)
@@ -76,39 +75,6 @@ function AdminListUsersPage() {
     };
     fetchData();
   }, []);
-  */
- //console.log(sessionStorage.getItem('token'));
- useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const token = sessionStorage.getItem('token'); // Replace this with your actual token
-
-      const response = await fetch('http://localhost:8080/api/users', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
-        },
-      });
-
-      if (response.status === 401) {
-        console.log('Authentication failed: Invalid credentials');
-      } else if (!response.ok) {
-        console.log(`Error! status: ${response.status}`);
-      } else {
-        const responseData = await response.text();
-        console.log(responseData);
-      }
-    } catch (e) {
-      console.log('Error', e);
-    }
-  };
-
-  fetchData();
-}, []);
-
-  //----------------------FILTERING USERS----------------------//
 
   useEffect(() => {
     setFilteredUsers(users.filter((user) => user.status === "visible")
