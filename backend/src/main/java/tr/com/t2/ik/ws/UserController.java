@@ -2,14 +2,13 @@ package tr.com.t2.ik.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tr.com.t2.ik.model.Personnel;
 import tr.com.t2.ik.repository.PersonnelRepository;
+import tr.com.t2.ik.ws.dto.PersonnelDto;
 import tr.com.t2.ik.ws.dto.PersonnelResponseDTO;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,8 +20,10 @@ public class UserController {
     private PersonnelRepository personnelRepository;
 
     @GetMapping
-    public String getMethod() {
-        return "User Area, Welcome";
+    @CrossOrigin
+    public List<PersonnelDto> getMethod() {
+        //<UserListDTO> personnelOptional = personnelRepository.findAllPersonnelDto();
+        return personnelRepository.findAllPersonnelDto();
     }
 
     @GetMapping

@@ -38,12 +38,13 @@ function AdminListUsersPage() {
   });
 
   type User = {
-    fname: string,
-    lname: string,
-    email: string,
-    birthDate: string,
+    firstname: string,
+    lastname: string,
+    username: string,
+    birthday: Date,
     gender: string,
-    status: string
+    status: string,
+    email: string,
   }
 
   // state to fetch users:
@@ -55,34 +56,55 @@ function AdminListUsersPage() {
   // to show loading animation:
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true)
-      try {
-        const response = await fetch('http://localhost:3001/admin/users');
-        if (!response.ok) {
-          console.log("hataaaaaa")
-        }
-        const data = await response.json();
-        setUsers(data);
-        console.log(data);
-        setIsLoading(false)
-        setError(false)
-      } catch (error) {
-        setError(true)
-        setIsLoading(false)
+  
+ //console.log(sessionStorage.getItem('token'));
+ useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const token = sessionStorage.getItem('token'); // Replace this with your actual token
+      setIsLoading(true);
+      const response = await fetch('http://localhost:8080/api/users', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
+        },
+      });
+
+      if (response.status === 401) {
+        console.log('Authentication failed: Invalid credentials');
+        setError(true);
+        setIsLoading(false);
+      } else if (!response.ok) {
+        setError(true);
+        setIsLoading(false);
+        console.log(`Error! status: ${response.status}`);
+      } else {
+        setError(false);
+        setIsLoading(false);
+        const responseData = await response.json();
+        setUsers(responseData);
       }
-    };
-    fetchData();
-  }, []);
+    } catch (e) {
+      console.log('Error', e);
+    }
+  };
+
+  fetchData();
+}, []);
+
+  //----------------------FILTERING USERS----------------------//
 
   useEffect(() => {
-    setFilteredUsers(users.filter((user) => user.status === "visible")
+    console.log("users: ");
+    console.log(users);
+    setFilteredUsers(users.filter((user) => user.status === "Aktif")
     )
   }, [users])
 
   // state for filtering users:
-  const [filter, setFilter] = useState<string>('visible');
+  const [filter, setFilter] = useState<string>('Aktif');
   const [filteredUsers, setFilteredUsers] = useState<User[]>(users);
 
   const filterHandler = (filter: string) => {
@@ -93,11 +115,11 @@ function AdminListUsersPage() {
 
   // function for filtering requests:
   const filterUsers = (filter: string) => {
-    if (filter === "visible") {
-        const filteredRequestsVar = users.filter((user) => user.status === "visible");
+    if (filter === "Aktif") {
+        const filteredRequestsVar = users.filter((user) => user.status === "Aktif");
         setFilteredUsers(filteredRequestsVar);
-    } else if (filter === "invisible") {
-        const filteredRequestsVar = users.filter((user) => user.status === "invisible");
+    } else if (filter === "Pasif") {
+        const filteredRequestsVar = users.filter((user) => user.status === "Pasif");
         setFilteredUsers(filteredRequestsVar);
     } else if (filter === "all") {
       setFilteredUsers(users);

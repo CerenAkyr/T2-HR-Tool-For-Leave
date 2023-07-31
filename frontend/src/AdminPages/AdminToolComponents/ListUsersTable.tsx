@@ -10,12 +10,14 @@ import './Components.css';
 import MakeVisibleButton from './MakeVisibleButton';
 
 type User = {
-    fname: string,
-    lname: string,
+    firstname: string,
+    lastname: string,
+    username: string,
+    birthday: Date,
+    gender: string,
+    status: string,
     email: string,
-    birthDate: string,
-    gender: string
-}
+  }
 
 interface UserProps {
     users: User[],
@@ -44,13 +46,13 @@ function ListUsersTable( { users }: UserProps ) {
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell align="center" component="th" scope="row">
-                                    {row.fname}
+                                    {row.firstname}
                                 </TableCell>
                                 <TableCell align="center" component="th" scope="row">
-                                    {row.lname}
+                                    {row.lastname}
                                 </TableCell>
                                 <TableCell align="center">{row.email}</TableCell>
-                                <TableCell align="center">{row.birthDate}</TableCell>
+                                <TableCell align="center">{row.birthday.toString()}</TableCell>
                                 <TableCell align="center">{row.gender}</TableCell>
                                 <TableCell align="center">
                                     <div className='request__button__holder'>
