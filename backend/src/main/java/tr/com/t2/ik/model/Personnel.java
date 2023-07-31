@@ -48,6 +48,13 @@ public class Personnel {
     @Column(name = "start_date")
     private Date startDate;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "gender")
+    private String gender;
+
+
 
 
 
