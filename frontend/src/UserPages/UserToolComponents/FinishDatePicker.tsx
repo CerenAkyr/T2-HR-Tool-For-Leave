@@ -8,8 +8,17 @@ import "./FinishDatePicker.css";
 import { light } from '@mui/material/styles/createPalette';
 import { lightGreen } from '@mui/material/colors';
 
-function DatePickerFinishValue() {
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-17'));
+interface DatePickerFinishValueProps {
+  onChange: (selectedEndDate: Dayjs | null) => void; // Handler to pass selected start date to parent component
+}
+
+function DatePickerFinishValue(props: DatePickerFinishValueProps) {
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs('2023-08-01'));
+
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+    props.onChange(newValue); // Pass the selected start date to parent component
+  };
 
   return (
     <div className="datepicker-container">
@@ -21,7 +30,7 @@ function DatePickerFinishValue() {
               className="datepicker-input"
               label=""
               value={value}
-              onChange={(newValue) => setValue(newValue)}
+              onChange={handleChange}
             />
           </div>
         </DemoContainer>

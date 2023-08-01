@@ -33,7 +33,7 @@ public class T2UserDetailsService implements UserDetailsService {
         Optional<Personnel> personnel = personnelRepository.findById(username);
         if (personnel.isPresent()) {
             return User.withUsername(
-                    personnel.get().getUsername())
+                            personnel.get().getUsername())
                     .password(personnel.get().getPassword())
                     .accountExpired(false)
                     .credentialsExpired(false)
@@ -58,7 +58,3 @@ public class T2UserDetailsService implements UserDetailsService {
         return null;
     }
 }
-
-
-
-

@@ -1,22 +1,16 @@
 package tr.com.t2.ik.model;
 import lombok.Data;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Date;
 
 @Data
 @Entity
-public class Request {
+public class OffDayRequest {
 
     @Id
     @Column
@@ -53,6 +47,16 @@ public class Request {
 
     @Column (name = "updated_By")
     private String updatedBy;
+
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
 
 

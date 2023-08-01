@@ -6,8 +6,8 @@ import tr.com.t2.ik.ws.dto.PersonnelDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-31T16:45:18+0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
+    date = "2023-08-01T10:22:06+0300",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.35.0.v20230721-1147, environment: Java 17.0.7 (Eclipse Adoptium)"
 )
 public class AutoPersonnelMapperImpl implements AutoPersonnelMapper {
 
@@ -19,13 +19,13 @@ public class AutoPersonnelMapperImpl implements AutoPersonnelMapper {
 
         PersonnelDto personnelDto = new PersonnelDto();
 
-        personnelDto.setUsername( personnel.getUsername() );
-        personnelDto.setFirstname( personnel.getFirstname() );
-        personnelDto.setLastname( personnel.getLastname() );
-        personnelDto.setBirthday( personnel.getBirthday() );
         personnelDto.setActivity( personnel.getActivity() );
+        personnelDto.setBirthday( personnel.getBirthday() );
         personnelDto.setEmail( personnel.getEmail() );
+        personnelDto.setFirstname( personnel.getFirstname() );
         personnelDto.setGender( personnel.getGender() );
+        personnelDto.setLastname( personnel.getLastname() );
+        personnelDto.setUsername( personnel.getUsername() );
 
         return personnelDto;
     }
@@ -38,13 +38,13 @@ public class AutoPersonnelMapperImpl implements AutoPersonnelMapper {
 
         Personnel personnel = new Personnel();
 
-        personnel.setUsername( personnelDto.getUsername() );
-        personnel.setFirstname( personnelDto.getFirstname() );
-        personnel.setLastname( personnelDto.getLastname() );
-        personnel.setBirthday( personnelDto.getBirthday() );
         personnel.setActivity( personnelDto.getActivity() );
+        personnel.setBirthday( personnelDto.getBirthday() );
         personnel.setEmail( personnelDto.getEmail() );
+        personnel.setFirstname( personnelDto.getFirstname() );
         personnel.setGender( personnelDto.getGender() );
+        personnel.setLastname( personnelDto.getLastname() );
+        personnel.setUsername( personnelDto.getUsername() );
 
         return personnel;
     }

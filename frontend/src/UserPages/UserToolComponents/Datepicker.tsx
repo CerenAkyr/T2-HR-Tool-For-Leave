@@ -1,23 +1,3 @@
-/* import * as React from 'react';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
-
-
-function StaticDatePickerLandscape() {
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh', maxHeight: '400px', overflow: 'auto' }}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <StaticDatePicker orientation="landscape" />
-        <StaticDatePicker orientation="landscape" />
-      </LocalizationProvider>
-    </div>
-  );
-}
-
-export default StaticDatePickerLandscape;
- */
-
 import * as React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -26,8 +6,18 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import "./StartDatePicker.css";
 
-function DatePickerValue() {
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-17'));
+
+interface DatePickerValueProps {
+  onChange: (selectedStartDate: Dayjs | null) => void; 
+}
+
+function DatePickerValue(props: DatePickerValueProps) {
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs('2023-08-01'));
+
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+    props.onChange(newValue); 
+  };
 
   return (
     <div className="datepicker-container">
@@ -39,7 +29,7 @@ function DatePickerValue() {
               className="datepicker-input"
               label=""
               value={value}
-              onChange={(newValue) => setValue(newValue)}
+              onChange={handleChange}
             />
           </div>
         </DemoContainer>

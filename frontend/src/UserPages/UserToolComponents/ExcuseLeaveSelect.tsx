@@ -5,12 +5,18 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import "../UserPages.css";
 
-export default function SelectExcuseLeave() {
+interface SelectExcuseLeaveProps {
+  onChange: (selectedExcuseType: string) => void; // Handler to pass selected excuseType to parent component
+}
+
+export default function SelectExcuseLeave(props: SelectExcuseLeaveProps) {
     const [excuseLeave, setexcuseLeave] = React.useState('');
   
-    const handleChange = (event: SelectChangeEvent) => {
-      setexcuseLeave(event.target.value);
-    };
+   const handleChange = (event: SelectChangeEvent) => {
+    const selectedExcuseType = event.target.value;
+    setexcuseLeave(selectedExcuseType);
+    props.onChange(selectedExcuseType); // Pass the selected excuseType to parent component
+  };
 
     return(<div className="select__center" style={{marginTop: "30px"}}>
     <FormControl className='formControl' sx={{ m: 1, minWidth: 150 , maxWidth:200}}>
