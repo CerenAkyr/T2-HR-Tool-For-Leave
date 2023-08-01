@@ -4,15 +4,13 @@ import PreviousRequestsTable from './PreviousRequestsTable';
 
 export default function ProfileInfoCard() {
     type UserInfo = {
-        id: number,
-        fname: string,
-        lname: string,
+        activity: string,
+        firstname: string,
+        lastname: string,
         email: string,
-        birthday: string,
+        birthday: Date,
         gender: string,
-        pwd: string,
-        totDays: number,
-        daysLeft: number
+        username: string,
     }
     // state to fetch userInfo:
     const [userInfo, setUserInfo] = useState<UserInfo>();
@@ -67,32 +65,35 @@ export default function ProfileInfoCard() {
             <MDBCol lg="6" className="mb-4 mb-lg-0">
                 <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
                     <MDBRow className="g-0">
-                        {userInfo &&
                             <MDBCardBody className="p-4">
                                 <MDBTypography tag="h6">Profil Bilgisi</MDBTypography>
                                 <hr className="mt-0 mb-4" />
+                                {userInfo &&
                                 <MDBRow className="pt-1">
                                     <MDBCol size="6" className="mb-3">
                                         <MDBTypography tag="h6">Ad Soyad</MDBTypography>
-                                        <MDBCardText className="text-muted">{userInfo?.fname + " " + userInfo?.lname}</MDBCardText>
+                                        <MDBCardText className="text-muted">{userInfo?.firstname + " " + userInfo?.lastname}</MDBCardText>
                                     </MDBCol>
                                     <MDBCol size="6" className="mb-3">
                                         <MDBTypography tag="h6">Email</MDBTypography>
                                         <MDBCardText className="text-muted">{userInfo?.email}</MDBCardText>
                                     </MDBCol>
                                 </MDBRow>
+                                }
+                                {userInfo &&
                                 <MDBRow className="pt-1">
                                     <MDBCol size="6" className="mb-3">
                                         <MDBTypography tag="h6">Doğum Günü</MDBTypography>
-                                        <MDBCardText className="text-muted">{userInfo?.birthday}</MDBCardText>
+                                        <MDBCardText className="text-muted">{userInfo?.birthday.toString()}</MDBCardText>
                                     </MDBCol>
                                     <MDBCol size="6" className="mb-3">
                                         <MDBTypography tag="h6">Cinsiyet</MDBTypography>
                                         <MDBCardText className="text-muted">{userInfo?.gender}</MDBCardText>
                                     </MDBCol>
                                 </MDBRow>
+                                }
                             </MDBCardBody>
-                        }
+                        
                     </MDBRow>
                 </MDBCard>
             </MDBCol>

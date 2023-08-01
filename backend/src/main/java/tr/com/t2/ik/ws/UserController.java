@@ -31,27 +31,26 @@ public class UserController {
         return personnelService.getAllUsers();
     }
 
-
-    @GetMapping
-    @RequestMapping("/role/{username}")
     @CrossOrigin
-    public Boolean getRole(@PathVariable("username") String username) {
+    @GetMapping("/role/{username}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String getRole(@PathVariable("username") String username) {
         Optional<Personnel> personnelOptional = personnelRepository.findById(username);
         if (personnelOptional.isPresent()) {
             Set<Role> roles = personnelOptional.get().getRoles();
             if (roles != null && roles.stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"))) {
-                return true;
+                return "ROLE_ADMIN";
             }
         }
-        return false;
+        return "ROLE_USER";
     }
 
     @GetMapping("/info/{username}")
     @CrossOrigin
-    public PersonnelDto getPersonnel(@PathVariable("username") String username) {
-        //System.out.println(personnelService.getUserInfo(username));
-        //if ( personnelService.getUserInfo(username) != null )
-        //    return personnelService.getUserInfo(username);
+    public PersonnelDto getPersonnelInfo(@PathVariable("username") String username) {
+        System.out.println(personnelService.getUserByUsername(username));
+        if ( personnelService.getUserByUsername(username) != null )
+            return personnelService.getUserByUsername(username);
         return null;
     }
 

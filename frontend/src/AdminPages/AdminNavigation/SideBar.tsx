@@ -99,9 +99,12 @@ function SideBar() {
             setIsOpen(true)
     }
 
-    // TODO:
-    // here you will learn user's role and then you will show the sidebar items according to the role
-    const userRole: string = "user";
+    const logoutHandler = () => {
+        sessionStorage.clear();
+        window.location.href = "/";
+    } 
+
+    const userRole: string = sessionStorage.getItem("role")!;
 
     return (
         <Paper elevation={4} className="sidebar" style={isOpen ? { width: "15vw" } : { width: "70px" }}>
@@ -115,7 +118,7 @@ function SideBar() {
             </List>
             <List className="sidebar__second__list">
                 {sidebarItems.map((item: MenuItem) =>
-                    item.role === "admin" ? (userRole === "admin" &&
+                    item.role === "admin" ? (userRole === "ROLE_ADMIN" &&
                         (isOpen ?
                             (<a href={item.link} key={item.link}>
                                 <ListItem className="sidebar__items">
@@ -173,11 +176,11 @@ function SideBar() {
             </List>
             <List className="sidebar__third__list">
                 <Divider variant="middle" />
-                <a href="/admin/logout">
+                <a onClick={logoutHandler} style={{cursor: "pointer"}}>
                     <ListItem className="sidebar__items">
                         <ListItemAvatar>
                             <Avatar className="sidebar__avatar">
-                                <PowerSettingsNewIcon />
+                                <PowerSettingsNewIcon/>
                             </Avatar>
                         </ListItemAvatar>
                         {isOpen && <ListItemText primary="Oturumu Kapat" />}

@@ -1,0 +1,30 @@
+.unauthorized {
+    background-color: rgb(255, 228, 234);
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.unauthorized h1 {
+    font-size: 3vh;
+    color: #271D1B;
+    margin-bottom: 20px;
+    margin-top: 2%;
+}
+
+.unauthorized h2 {
+    font-size: 2vh;
+    color: #271D1B;
+    margin-bottom: 6%;
+}
+
+.unauthorized img {
+    height: 50%;
+}
+
+body {
+    font-family: "Roboto";
+}

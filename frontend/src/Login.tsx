@@ -69,10 +69,36 @@ export default function SignIn() {
         // Save the token to sessionStorage
         sessionStorage.setItem('token', responseData);
         sessionStorage.setItem('username', requestBody.username?.toString()!);
-        console.log(responseData);
-        console.log("tokennnnn:");
-        console.log(sessionStorage.getItem('username'));
-        navigate('/admin/users');
+
+       
+          try {
+            const token = sessionStorage.getItem('token');
+            const username = sessionStorage.getItem('username');
+
+            const response = await fetch('http://localhost:8080/role/' + username, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
+              },
+            });
+            if (response.status === 401) {
+              console.log('Authentication failed: Invalid credentials');
+            } else if (!response.ok) {
+              console.log(`Error! status: ${response.status}`);
+            } else {
+              const responseData = await response.text();
+              console.log("fetch: ", responseData);
+              sessionStorage.setItem('role', responseData);
+            }
+          } catch (e) {
+            console.log('Error', e);
+          }
+          if ( sessionStorage.getItem('role') === "ROLE_ADMIN")
+            navigate('/admin/users');
+          else
+            navigate('/user/add-off-days');
       }
     } catch (e) {
       console.log('Error', e);
