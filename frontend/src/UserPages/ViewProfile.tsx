@@ -1,14 +1,9 @@
 import "./UserPages.css";
-import ProfileInfo from "./UserToolComponents/ProfileInfo";
-import { Tabs } from 'antd';
-import PreviousRequestsTable from "./UserToolComponents/PreviousRequestsTable";
+import ProfileInfo from "./UserToolComponents/UserProfileComponents/ProfileInfo";
 import SideBar from "../AdminPages/AdminNavigation/SideBar";
-import Box from '@mui/material/Box';
-import PreviousRequestsCard from "./UserToolComponents/PreviousRequestsCard";
+import PreviousRequestsCard from "./UserToolComponents/UserProfileComponents/PreviousRequestsCard";
 
 function ViewProfile() {
-
-
     return (
         <div className="page__holder"  >
             <SideBar />
@@ -16,12 +11,8 @@ function ViewProfile() {
                 <ProfileInfo />
                 <PreviousRequestsCard />
             </div>
-            
-            
-
         </div>
     );
 }
 
 export default ViewProfile;
-

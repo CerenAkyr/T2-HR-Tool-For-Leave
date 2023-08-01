@@ -68,9 +68,10 @@ export default function SignIn() {
         const responseData = await response.text();
         // Save the token to sessionStorage
         sessionStorage.setItem('token', responseData);
+        sessionStorage.setItem('username', requestBody.username?.toString()!);
         console.log(responseData);
         console.log("tokennnnn:");
-        console.log(sessionStorage.getItem('token'));
+        console.log(sessionStorage.getItem('username'));
         navigate('/admin/users');
       }
     } catch (e) {

@@ -25,25 +25,42 @@ export default function ProfileInfoCard() {
 
     useEffect(() => {
         const fetchData = async () => {
-            setIsLoading(true)
-            try {
-                const response = await fetch('http://localhost:3001/user/profile-info');
-                if (!response.ok) {
-                    console.log("hataaaaaa")
-                }
-                const data = await response.json();
-                setUserInfo(data);
-                console.log(data);
-                setIsLoading(false)
-                setError(false)
-            } catch (error) {
-                setError(true)
-                setIsLoading(false)
+          try {
+            const token = sessionStorage.getItem('token'); // Replace this with your actual token
+            const username = sessionStorage.getItem('username');
+            console.log(token);
+            setIsLoading(true);
+            const response = await fetch('http://localhost:8080/info/' + username, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
+              },
+            });
+    
+            if (response.status === 401) {
+              console.log('Authentication failed: Invalid credentials');
+              setError(true);
+              setIsLoading(false);
+            } else if (!response.ok) {
+              setError(true);
+              setIsLoading(false);
+              console.log(`Error! status: ${response.status}`);
+            } else {
+              setError(false);
+              setIsLoading(false);
+              const responseData = await response.json();
+              setUserInfo(responseData);
+              console.log("fetch: ", responseData);
             }
+          } catch (e) {
+            console.log('Error', e);
+          }
         };
+    
         fetchData();
-    }, []);
-
+      }, []);
     return (
 
         <MDBRow className="justify-content-center align-items-center h-100 mb-0">

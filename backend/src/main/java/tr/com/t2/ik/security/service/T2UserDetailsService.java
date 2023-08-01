@@ -52,6 +52,13 @@ public class T2UserDetailsService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
+    public PersonnelDto getUserByUsername(String username) {
+        Optional<Personnel> userOptional = personnelRepository.findByUsername(username);
 
-
+        return userOptional.map(user -> AutoPersonnelMapper.MAPPER.mapToPersonnelDto(user)).orElse(null);
+    }
 }
+
+
+
+
