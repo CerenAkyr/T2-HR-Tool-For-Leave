@@ -10,7 +10,7 @@ function IsAuthorized() {
     return (
         <div>
             {username && (role === "ROLE_ADMIN" ? <Outlet /> : <Navigate to="/unauthorized" state={{from: location}} replace />)}
-            {!username && <Navigate to="/login" state={{from: location}} replace />}
+            {!username && <Navigate to="/" state={{from: location}} replace />}
         </div>
     );
 

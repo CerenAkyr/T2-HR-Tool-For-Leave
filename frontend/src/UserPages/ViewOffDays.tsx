@@ -8,10 +8,9 @@ import SideBar from "../AdminPages/AdminNavigation/SideBar";
 
 
 function ViewOffDays() {
-    return(
-        <div className="page__holder">
-            <SideBar />
-            <div>
+  return (
+    <div className="page__holder">
+      <SideBar />
         <Box
           sx={{
             marginTop: "4vh",
@@ -20,10 +19,10 @@ function ViewOffDays() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: '#9f5cbe', ml: 22  }}>
+          <Avatar sx={{ m: 1, bgcolor: '#9f5cbe', ml: 22 }}>
             <CalendarMonthOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" sx={{ mb: -3 , ml: 20 }} >
+          <Typography component="h1" variant="h5" sx={{ mb: -3, ml: 20 }} >
             İzin Takvimi
           </Typography>
         </Box>
@@ -31,21 +30,15 @@ function ViewOffDays() {
         <div className="calendar__holder" style={{ marginLeft: "250px" }}>
           <CalendarForLeave />
         </div>
-
-        
-      </div>
-            
-          
-        </div>
-        
-    );
+    </div>
+        );
 }
 
-export default ViewOffDays;
+        export default ViewOffDays;
 
 
 
 
-  
 
-  
+
+

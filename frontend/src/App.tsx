@@ -17,6 +17,7 @@ import Layout from "./Routing/Layout";
 import Unauthorized from "./Routing/Unauthorized";
 import IsAuthorized from "./Routing/IsAuthorized";
 import IsAuthorizedUser from "./Routing/IsAuthorizedUser";
+import MissingPage from "./Routing/MissingPage";
 
 function App() {
   //const role = sessionStorage.getItem("role");
@@ -44,7 +45,7 @@ function App() {
           </Route>
 
           {/* Catch Else */}
-          <Route path="*" element={<Unauthorized />} />
+          <Route path="*" element={<MissingPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

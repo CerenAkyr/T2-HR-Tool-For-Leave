@@ -1,0 +1,27 @@
+.missing__page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #FFF4BB;
+}
+
+.missing__page h1 {
+    font-size: 3vh;
+    color: #735d46;
+    margin-bottom: 20px;
+    margin-top: 2%;
+}
+
+.missing__page h2 {
+    font-size: 2vh;
+    color: #735d46;
+    margin-bottom: 6%;
+}
+
+.missing__page img {
+    height: 40%;
+    margin-bottom: 2%;
+}
