@@ -30,7 +30,7 @@ function IconLabelButtons(props: IconLabelButtonsProps) {
       const token = sessionStorage.getItem('token'); 
       console.log(token);
       
-      const response = await fetch('http://localhost:8080/api/add-off-days', {
+      const response = await fetch('http://localhost:8080/api/off', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header

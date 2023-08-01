@@ -18,7 +18,7 @@ import tr.com.t2.ik.security.JwtTokenUtil;
 
 @RestController
 
-@RequestMapping("/api/add-off-days")
+
 public class RequestController {
 
     @Autowired
@@ -30,16 +30,18 @@ public class RequestController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+
+    @PostMapping("/api/off")
     @CrossOrigin
-    @PostMapping
     public ResponseEntity<?> addOffDays(@RequestBody OffDayRequest offDayRequest) {
+
         try {
             // Burada veritabanına kaydetme işlemi
             // İlgili entity sınıfınızın (ExcuseLeave) veritabanına kaydeden bir repository (excuseLeaveRepository) kullanılmalıdır.
             // Örnek olarak:
 
-
             OffDayRequest receivedOffDayRequest = new OffDayRequest();
+
             receivedOffDayRequest.setRequestId(offDayRequest.getRequestId());
             receivedOffDayRequest.setRequestStatus(offDayRequest.getRequestStatus());
             receivedOffDayRequest.setExcuseCreateDate(offDayRequest.getExcuseCreateDate());
@@ -60,5 +62,7 @@ public class RequestController {
             // Hata durumunda hata yanıtı döndür
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("İzin isteği kaydedilirken bir hata oluştu.");
         }
+
+
     }
 }
