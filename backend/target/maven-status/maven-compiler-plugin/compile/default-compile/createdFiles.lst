@@ -14,6 +14,7 @@ tr\com\t2\ik\security\JwtTokenUtil.class
 tr\com\t2\ik\ws\dto\JwtRequest.class
 tr\com\t2\ik\T2IKApplication.class
 tr\com\t2\ik\ws\dto\PersonnelResponseDTO$PersonnelResponseDTOBuilder.class
+tr\com\t2\ik\mapper\AutoPersonnelMapperImpl.class
 tr\com\t2\ik\security\JwtAuthenticationEntryPoint.class
 tr\com\t2\ik\mapper\AutoPersonnelMapper.class
 tr\com\t2\ik\model\Personnel.class

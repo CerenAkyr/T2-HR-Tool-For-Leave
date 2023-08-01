@@ -1,5 +1,6 @@
 import { MDBCol, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBTypography } from 'mdb-react-ui-kit';
 import { useState, useEffect } from 'react';
+import PreviousRequestsTable from './PreviousRequestsTable';
 
 export default function ProfileInfoCard() {
     type UserInfo = {
@@ -45,7 +46,7 @@ export default function ProfileInfoCard() {
 
     return (
 
-        <MDBRow className="justify-content-center align-items-center h-100">
+        <MDBRow className="justify-content-center align-items-center h-100 mb-0">
             <MDBCol lg="6" className="mb-4 mb-lg-0">
                 <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
                     <MDBRow className="g-0">
@@ -55,11 +56,11 @@ export default function ProfileInfoCard() {
                                 <hr className="mt-0 mb-4" />
                                 <MDBRow className="pt-1">
                                     <MDBCol size="6" className="mb-3">
-                                        <MDBTypography tag="h6">Ad</MDBTypography>
+                                        <MDBTypography tag="h6">Ad Soyad</MDBTypography>
                                         <MDBCardText className="text-muted">{userInfo?.fname + " " + userInfo?.lname}</MDBCardText>
                                     </MDBCol>
                                     <MDBCol size="6" className="mb-3">
-                                        <MDBTypography tag="h6">Soyad</MDBTypography>
+                                        <MDBTypography tag="h6">Email</MDBTypography>
                                         <MDBCardText className="text-muted">{userInfo?.email}</MDBCardText>
                                     </MDBCol>
                                 </MDBRow>
@@ -71,18 +72,6 @@ export default function ProfileInfoCard() {
                                     <MDBCol size="6" className="mb-3">
                                         <MDBTypography tag="h6">Cinsiyet</MDBTypography>
                                         <MDBCardText className="text-muted">{userInfo?.gender}</MDBCardText>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBTypography tag="h6"></MDBTypography>
-                                <hr className="mt-0 mb-4" />
-                                <MDBRow className="pt-1">
-                                    <MDBCol size="6" className="mb-3">
-                                        <MDBTypography tag="h6">Toplam İzinli Gün Sayısı</MDBTypography>
-                                        <MDBCardText className="text-muted">{userInfo?.totDays}</MDBCardText>
-                                    </MDBCol>
-                                    <MDBCol size="6" className="mb-3">
-                                        <MDBTypography tag="h6">Kalan İzinli Gün Sayısı</MDBTypography>
-                                        <MDBCardText className="text-muted">{userInfo?.daysLeft}</MDBCardText>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCardBody>

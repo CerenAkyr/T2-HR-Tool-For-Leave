@@ -1,5 +1,6 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
+import Tooltip from '@mui/material/Tooltip';
 
 
 function EditProfileButton() {
@@ -8,10 +9,9 @@ function EditProfileButton() {
     navigate('/user/edit-profile');
   }
   return (
-    <div className='actionBtn' onClick={editBtnHandler} style={{display: "flex"}}>
+    <Tooltip title="Profili Düzenle" className='actionBtn' onClick={editBtnHandler} style={{display: "flex"}} placement='top'>
       <EditIcon className='actionBtn' style={{marginLeft: "-52px"}} />
-      <p style={{marginLeft: "5px", fontSize: "16px", fontWeight: "500"}}>Profili Düzenle</p>
-    </div>
+    </Tooltip>
     
   );
 }

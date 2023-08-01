@@ -15,7 +15,7 @@ type User = {
     username: string,
     birthday: Date,
     gender: string,
-    status: string,
+    activity: string,
     email: string,
   }
 
@@ -56,7 +56,7 @@ function ListUsersTable( { users }: UserProps ) {
                                 <TableCell align="center">{row.gender}</TableCell>
                                 <TableCell align="center">
                                     <div className='request__button__holder'>
-                                        <EditActionButton /> <MakeVisibleButton status={row.status}/>
+                                        <EditActionButton /> <MakeVisibleButton status={row.activity}/>
                                     </div>
                                 </TableCell>
                             </TableRow>

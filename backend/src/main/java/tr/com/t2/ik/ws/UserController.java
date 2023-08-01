@@ -18,11 +18,14 @@ public class UserController {
 
     @Autowired
     private PersonnelRepository personnelRepository;
+    @Autowired
     private T2UserDetailsService personnelService;
 
+
+    //
+    @CrossOrigin
     @GetMapping("api/users")
     @PreAuthorize("hasRole('ROLE_USER')")
-    @CrossOrigin
     public List<PersonnelDto> getMethod() {
         return personnelService.getAllUsers();
     }

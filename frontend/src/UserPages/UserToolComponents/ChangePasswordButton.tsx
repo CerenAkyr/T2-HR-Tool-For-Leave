@@ -1,4 +1,6 @@
 import "./Profile.css";
+import LockIcon from '@mui/icons-material/Lock';
+import Tooltip from '@mui/material/Tooltip';
 
 function ChangePasswordButton() {
 
@@ -7,9 +9,9 @@ function ChangePasswordButton() {
     }
 
     return (
-        <div className="pwd__button__div">
-            <button className="btn btn-primary pwd__button" style={{backgroundColor: 'purple'}}  onChange={pwdChangeHandler}>Change Password</button>
-        </div>
+        <Tooltip title="Şifre Değiştir" className='actionBtn' onClick={pwdChangeHandler} style={{ display: "flex" }} placement="top">
+            <LockIcon className='actionBtn' style={{ marginLeft: "-52px" }} />
+        </Tooltip>
     )
 }
 

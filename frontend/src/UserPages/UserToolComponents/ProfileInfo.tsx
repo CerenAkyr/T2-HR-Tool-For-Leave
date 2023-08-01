@@ -10,9 +10,9 @@ function ProfileInfo() {
         <div className="profile__div">
             <div className="profile__edit__holder">
                 <EditProfileButton />
+                <ChangePasswordButton /> 
             </div>
-            <ProfileInfoCard />
-            <ChangePasswordButton />    
+            <ProfileInfoCard />   
         </div>
     );
 }
