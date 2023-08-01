@@ -5,7 +5,6 @@ import ProfileInfoCard from "./ProfileInfoCard";
 
 function ProfileInfo() {
 
-
     return (
         <div className="profile__div">
             <div className="profile__edit__holder">

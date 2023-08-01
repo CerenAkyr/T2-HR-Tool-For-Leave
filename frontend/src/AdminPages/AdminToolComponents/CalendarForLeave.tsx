@@ -10,8 +10,8 @@ const CalendarForLeave: React.FC = () => {
   };
 
   return (
-    <div className='calendar_holder'>
-      <Calendar onPanelChange={onPanelChange} />
+    <div>
+      <Calendar onPanelChange={onPanelChange} className='calendar__holder'/>
     </div>
   );
 };

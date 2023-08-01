@@ -48,52 +48,48 @@ function UserAddOffDay() {
   };
 
 
-  
-
-
   return (
-    <div className='page__holder'>
-      <SideBar  />
+    <div>
       <Box
-          sx={{
-            marginTop: 10,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            margin :'auto',
-            paddingLeft: '70px',
-          }}
-        >
- <Avatar sx={{ m: 1, bgcolor: '#9f5cbe' }}>
-            <StickyNote2Icon />
-          </Avatar>
-          <Typography component="h1" variant="h5" sx={{ mb: 3 }} >
-            İzin İsteği
-          </Typography>      
-          <SelectExcuseLeave onChange={handleExcuseTypeChange} />
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          margin: 'auto',
+          width: '50%',
+          marginTop: "4vh",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: '#9f5cbe' }}>
+          <StickyNote2Icon />
+        </Avatar>
+        <Typography component="h1" variant="h5" sx={{ mb: 3 }} >
+          İzin İsteği
+        </Typography>
+        <SelectExcuseLeave onChange={handleExcuseTypeChange} />
 
-<Grid container spacing={10}  >
-              <Grid item xs={1} sm={6}  >
-              <DatePickerValue  onChange={handleStartDateChange}  />
-              </Grid>
-              <Grid item  xs={1} sm={6} >
-              <DatePickerFinishValue onChange={handleEndDateChange} />
-              </Grid>
-      
-      
-      </Grid>
-      <TextField id="description" label="İzin Gerekçesi" variant="outlined"  sx={{margin: 4, width: 400}} multiline
+        <Grid container spacing={10}  >
+          <Grid item xs={1} sm={6}  >
+            <DatePickerValue onChange={handleStartDateChange} />
+          </Grid>
+          <Grid item xs={1} sm={6} >
+            <DatePickerFinishValue onChange={handleEndDateChange} />
+          </Grid>
+
+
+        </Grid>
+        <TextField id="description" label="İzin Gerekçesi" variant="outlined" sx={{ margin: 4, width: 400 }} multiline
           rows={4} value={description}
           onChange={(e) => setDescription(e.target.value)} />
-      <IconLabelButtons 
-        excuseType={excuseType}
-        excuseStartDate={excuseStartDate}
-        excuseEndDate={excuseEndDate}
-        description={description}  />
-        </Box>
-        
-      
-      
+        <IconLabelButtons
+          excuseType={excuseType}
+          excuseStartDate={excuseStartDate}
+          excuseEndDate={excuseEndDate}
+          description={description} />
+      </Box>
+
+
+
     </div>
   );
 }

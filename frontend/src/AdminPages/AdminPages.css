@@ -8,8 +8,7 @@
 }
 
 .calendar__holder {
-    height: 40vh !important;
-    justify-content: center;
+    height: 40% !important;
     margin-top: 4vh;
 }
 

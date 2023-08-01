@@ -5,13 +5,10 @@ import PreviousRequestsCard from "./UserToolComponents/UserProfileComponents/Pre
 
 function ViewProfile() {
     return (
-        <div className="page__holder"  >
-            <SideBar />
-            <div className="profile__elements">
+            <div>
                 <ProfileInfo />
                 <PreviousRequestsCard />
             </div>
-        </div>
     );
 }
 

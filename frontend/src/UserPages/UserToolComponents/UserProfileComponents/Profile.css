@@ -18,7 +18,6 @@
     font-size: 16px;
     margin-top: 0;
     margin-left: 1rem;
-    
   }
   
   .profile__info__label {
@@ -37,6 +36,7 @@
     width: 15%;
     display: flex;
     margin-bottom: 2vh;
+    margin-top: 2vh;
 }
 
 .profile__table__div {
@@ -48,12 +48,4 @@
     text-align: center;
     margin-top: 3vh;
     width: 96%;
-}
-
-.pwd__button__div {
-  margin-top: 4vh;
-}
-
-.pwd__button {
-  background-color: #4689E7 !important;
 }

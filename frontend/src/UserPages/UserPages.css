@@ -166,9 +166,3 @@
 .page__holder {
   display: flex;
 }
-
-.profile__elements {
-  display: block;
-  margin: auto;
-  width: 100vw;
-}
