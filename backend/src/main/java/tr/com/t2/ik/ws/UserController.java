@@ -49,9 +49,9 @@ public class UserController {
     @GetMapping("/info/{username}")
     @CrossOrigin
     public PersonnelDto getPersonnel(@PathVariable("username") String username) {
-        System.out.println(personnelService.getUserInfo(username));
-        if ( personnelService.getUserInfo(username) != null )
-            return personnelService.getUserInfo(username);
+        //System.out.println(personnelService.getUserInfo(username));
+        //if ( personnelService.getUserInfo(username) != null )
+        //    return personnelService.getUserInfo(username);
         return null;
     }
 
