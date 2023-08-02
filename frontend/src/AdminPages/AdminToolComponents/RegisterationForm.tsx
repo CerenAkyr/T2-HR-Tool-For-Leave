@@ -4,8 +4,6 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import BadgeIcon from '@mui/icons-material/Badge';
@@ -17,42 +15,64 @@ import FormControl from '@mui/material/FormControl';
 import Radio from '@mui/material/Radio';
 import FormLabel from '@mui/material/FormLabel';
 import DatePickerValue from './StartDatePicker';
+import dayjs, { Dayjs } from 'dayjs';
 import "./StartDatePicker.css"
-import StickyFooter from '../../StickyFooter';
-
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://www.t2.com.tr">
-        T2 YAZILIM
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
-
-
 
 export default function SignUp() {
+
+  // state to get date from datepicker:
+  const [selectedDate, setSelectedDate] = React.useState<Dayjs | null>(
+    dayjs('1999-05-01')
+  );
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const requestBody ={
+      username: data.get('username'),
       email: data.get('email'),
       password: data.get('password'),
-    });
+      firstname: data.get('firstName'),
+      lastname: data.get('lastName'),
+      gender: data.get('gender'),
+      birthday: selectedDate,
+    };
+
+    console.log("Request body: ", requestBody);
+    const token = sessionStorage.getItem('token');
+    // register user:
+    fetch('http://localhost:8080/new-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
+      },
+       body: JSON.stringify(requestBody),
+    })
+
+      .then((response) => {
+        if (response.status === 200) {
+          console.log('Registration successful');
+        } else {
+          console.log('Registration failed');
+        }
+      }
+      )
+      .catch((error) => {
+        console.log(error);
+      }
+      );
+  };
+
+  const handleDateChange = (date: Dayjs | null) => {
+    setSelectedDate(date);
   };
 
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#1392c2', 
+        main: '#1392c2',
       },
     },
   });
@@ -67,7 +87,7 @@ export default function SignUp() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            
+
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: '#9f5cbe' }}>
@@ -80,7 +100,7 @@ export default function SignUp() {
             component="form"
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 3, paddingLeft: "0px" }} 
+            sx={{ mt: 3, paddingLeft: "0px" }}
           >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -108,6 +128,16 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  id="username"
+                  label="Kullanıcı Adı"
+                  name="username"
+                  autoComplete="username"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   id="email"
                   label="Email"
                   name="email"
@@ -125,52 +155,35 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
                 <Grid item xs={12}>
-                <FormControl component="fieldset" sx={{ mt: 2 }}>
-                  <FormLabel sx={{ justifyContent: 'center', pl: 21 }}  component="legend">Cinsiyet</FormLabel>
-                  <RadioGroup
-                    aria-label="gender"
-                    name="gender"
-                    row
-                    sx={{ justifyContent: 'center', pl: 14 }}
-                  >
-                    <FormControlLabel value="female" control={<Radio />} label="Kadın" />
-                    <FormControlLabel value="male" control={<Radio />} label="Erkek" />
-                   
-                  </RadioGroup>
-                </FormControl>
+                  <FormControl component="fieldset" sx={{ mt: 2 }}>
+                    <FormLabel sx={{ justifyContent: 'center', pl: 21 }} component="legend">Cinsiyet</FormLabel>
+                    <RadioGroup
+                      aria-label="gender"
+                      name="gender"
+                      row
+                      sx={{ justifyContent: 'center', pl: 14 }}
+                    >
+                      <FormControlLabel value="Kadın" control={<Radio />} label="Kadın" />
+                      <FormControlLabel value="Erkek" control={<Radio />} label="Erkek" />
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
               </Grid>
-              </Grid>
-              {/* <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid> */}
             </Grid>
             <Grid item xs={12} mt={-2}>
-                    <DatePickerValue/>
-              </Grid>
+              <DatePickerValue handleDateChange={handleDateChange} />
+            </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 1, mb: 2 }}
             >
-              KAYIT OL 
+              KAYIT OL
             </Button>
-            {/* <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid> */}
           </Box>
         </Box>
-       {/* <Copyright sx={{ mt: 5 }} /> */}
-       
       </Container>
-      
     </ThemeProvider>
   );
 }

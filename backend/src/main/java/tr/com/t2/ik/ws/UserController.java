@@ -1,14 +1,18 @@
 package tr.com.t2.ik.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tr.com.t2.ik.model.Personnel;
 import tr.com.t2.ik.model.Role;
 import tr.com.t2.ik.repository.PersonnelRepository;
 import tr.com.t2.ik.security.service.T2UserDetailsService;
+import tr.com.t2.ik.ws.dto.NewPersonnelDTO;
 import tr.com.t2.ik.ws.dto.PersonnelDto;
 import tr.com.t2.ik.ws.dto.PersonnelResponseDTO;
 
@@ -48,10 +52,34 @@ public class UserController {
     @GetMapping("/info/{username}")
     @CrossOrigin
     public PersonnelDto getPersonnelInfo(@PathVariable("username") String username) {
-        System.out.println(personnelService.getUserByUsername(username));
         if ( personnelService.getUserByUsername(username) != null )
             return personnelService.getUserByUsername(username);
         return null;
+    }
+
+    @PostMapping("/passive/{username}")
+    @CrossOrigin
+    public Personnel makePassivePersonnel(@PathVariable("username") String username) {
+        if ( personnelService.getUserByUsername(username) != null )
+            return personnelService.passivePersonnelActivity(username);
+        return null;
+    }
+
+    @PostMapping("/active/{username}")
+    @CrossOrigin
+    public Personnel makeActivePersonnel(@PathVariable("username") String username) {
+        if ( personnelService.getUserByUsername(username) != null )
+            return personnelService.activatePersonnelActivity(username);
+        return null;
+    }
+
+    @PostMapping("/new-user")
+    @CrossOrigin
+    public ResponseEntity<Personnel> createNewPersonnel(@RequestBody @Validated NewPersonnelDTO newPersonnelDTO) {
+        Personnel newUser = personnelService.createUser(newPersonnelDTO);
+        System.out.println("-----------GELEN USER-------------");
+        System.out.println(newPersonnelDTO);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
 }

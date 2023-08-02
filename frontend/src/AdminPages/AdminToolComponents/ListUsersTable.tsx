@@ -56,7 +56,7 @@ function ListUsersTable( { users }: UserProps ) {
                                 <TableCell align="center">{row.gender}</TableCell>
                                 <TableCell align="center">
                                     <div className='request__button__holder'>
-                                        <EditActionButton /> <MakeVisibleButton status={row.activity}/>
+                                        <EditActionButton /> <MakeVisibleButton status={row.activity} username={row.username}/>
                                     </div>
                                 </TableCell>
                             </TableRow>

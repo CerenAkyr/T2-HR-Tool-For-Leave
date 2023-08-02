@@ -1,4 +1,5 @@
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import "./Components.css";
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
@@ -7,9 +8,10 @@ import Tooltip from '@mui/material/Tooltip';
 
 type props = {
     status: string
+    username: string
 }
 
-function MakeVisibleButton({ status }: props) {
+function MakeVisibleButton({ status, username }: props) {
 
     // state to show modal:
     const [show, setShow] = useState(false);
@@ -17,23 +19,56 @@ function MakeVisibleButton({ status }: props) {
     const handleClose = () => setShow(false);
 
     const makeVisibleHandler = () => {
-        // ToDo: görünür yap
-        console.log("görünür yap");
+        const token = sessionStorage.getItem("token");
+        fetch("http://localhost:8080/active/" + username, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: 'application/json',
+                Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            });
         setShow(false);
+        window.location.reload()
     }
 
     const makeInvisibleHandler = () => {
-        // ToDo: görünmez yap
-        console.log("görünmez yap");
+        const token = sessionStorage.getItem("token");
+        fetch("http://localhost:8080/passive/" + username, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: 'application/json',
+                Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            });
         setShow(false);
+        window.location.reload()
     }
 
     return (
         <>
-            <Tooltip title={status === "Aktif" ? "Pasif hale getir" : "Aktif hale getir"} placement='bottom'>
-                <VisibilityOffIcon className="request__button" onClick={() => setShow(true)}
-                >Make Visible</VisibilityOffIcon>
-            </Tooltip>
+            {status === "Aktif" &&
+                <Tooltip title="Pasif hale getir" placement='bottom'>
+                    <VisibilityOffIcon className="request__button" onClick={() => setShow(true)}>
+                        Make Visible
+                    </VisibilityOffIcon>
+                </Tooltip>}
+            {status === "Pasif" &&
+                <Tooltip title="Aktif hale getir" placement='bottom'>
+                    <VisibilityIcon className="request__button" onClick={() => setShow(true)}>
+                        Make Visible
+                    </VisibilityIcon>
+                </Tooltip>
+            }
             {status === "Aktif" &&
                 <Modal
                     show={show}

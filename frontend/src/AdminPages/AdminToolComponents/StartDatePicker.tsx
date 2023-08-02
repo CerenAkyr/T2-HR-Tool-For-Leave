@@ -6,7 +6,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import "./StartDatePicker.css";
 
-function DatePickerValue() {
+type props = {
+  handleDateChange: (date: Dayjs | null) => void
+}
+
+function DatePickerValue( {handleDateChange}: props) {
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('2001-07-18'));
 
   return (
@@ -19,7 +23,7 @@ function DatePickerValue() {
               className="datepicker-input"
               label=""
               value={value}
-              onChange={(newValue) => setValue(newValue)}
+              onChange={(newValue) => handleDateChange(newValue)}
             />
           </div>
         </DemoContainer>
