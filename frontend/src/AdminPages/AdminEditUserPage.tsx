@@ -1,57 +1,77 @@
-import EditUserForm from "./AdminEditUserComponents/EditUserForm";
 import { Routes, Route, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SideBar from "./AdminNavigation/SideBar";
+import "./AdminPages.css";
+import dayjs, { Dayjs } from 'dayjs';
+import Alert from '@mui/material/Alert';
+import EditUserForm from "./AdminToolComponents/AdminEditUserComponents/EditUserForm";
+import Loading from "./AdminToolComponents/Loading";
 
 interface User {
-    id: number,
-    fname: string,
-    lname: string,
+    username: string,
+    firstname: string,
+    lastname: string,
     email: string,
     gender: string,
-    birthday: string,  
-    pwd: string,
+    birthday: Dayjs,  
+    activity: string,
 }
 function AdminEditUserPage() {
-    // fetch user id from the url:
+    // fetch username from the url:
     let params = useParams();
-    let uid = params.userId;
+    let username = params.userId;
 
     // states for fetching:
-    const [user, setUser] = useState<User>({ id: 0, fname: "", lname: "", email: "", gender: "", birthday: "", pwd: ""});
+    const [user, setUser] = useState<User>({ username: "", firstname: "", lastname: "", email: "", gender: "", birthday: dayjs('1999-05-01'), activity: ""});
     const [error, setError] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     // fetch the user with uid from the database:
     useEffect(() => {
         const fetchData = async () => {
-            setIsLoading(true)
-            try {
-                const response = await fetch('http://localhost:3001/admin/edit/' + uid);
-                if (!response.ok) {
-                    console.log("hataaaaaa")
-                }
-                const data = await response.json();
-                setUser(data);
-                console.log(data);
-                setIsLoading(false)
-                setError(false)
-            } catch (error) {
-                setError(true)
-                setIsLoading(false)
+          try {
+            const token = sessionStorage.getItem('token');
+            console.log(token);
+            setIsLoading(true);
+            const response = await fetch('http://localhost:8080/info/' + username, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            if (response.status === 401) {
+              console.log('Authentication failed: Invalid credentials');
+              setError(true);
+              setIsLoading(false);
+            } else if (!response.ok) {
+              setError(true);
+              setIsLoading(false);
+              console.log(`Error! status: ${response.status}`);
+            } else {
+              setError(false);
+              setIsLoading(false);
+              const responseData = await response.json();
+              setUser(responseData);
+              console.log("fetch: ", responseData);
             }
+          } catch (e) {
+            console.log('Error', e);
+          }
         };
         fetchData();
-    }, []);
+      }, []);
 
     return (
-        <div>
+        <div className="page__holder">
             <SideBar />
-            
+            {error && <Alert severity="error">Kullanıcı bilgileri alınamadı!</Alert>}
+            {isLoading && <Loading />}
+            {!error && !isLoading &&  <EditUserForm user={user} usernameOfEdit={username}/>}
         </div>
     )
 }
 
-//<EditUserForm user={user} />
 
 export default AdminEditUserPage;

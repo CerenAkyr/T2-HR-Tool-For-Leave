@@ -17,6 +17,7 @@ import tr.com.t2.ik.ws.dto.NewPersonnelDTO;
 import tr.com.t2.ik.ws.dto.PersonnelDto;
 import tr.com.t2.ik.model.Role;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.*;
@@ -111,4 +112,43 @@ public class T2UserDetailsService implements UserDetailsService {
         System.out.println(newUser);
         return personnelRepository.save(newUser);
     }
+
+    public Personnel updatePersonnel(NewPersonnelDTO updatePersonnelDTO, String username) {
+        Optional<Personnel> existingPersonnel = personnelRepository.findByUsername(username);
+        if (existingPersonnel == null) {
+            throw new EntityNotFoundException("Personnel with username " + username + " not found");
+        }
+        Personnel personnel = existingPersonnel.get();
+
+        // Update the fields from updatePersonnelDTO
+        personnel.setFirstname(updatePersonnelDTO.getFirstname());
+        personnel.setLastname(updatePersonnelDTO.getLastname());
+        personnel.setEmail(updatePersonnelDTO.getEmail());
+        personnel.setGender(updatePersonnelDTO.getGender());
+        personnel.setBirthday(updatePersonnelDTO.getBirthday());
+        personnel.setUsername(updatePersonnelDTO.getUsername());
+
+        // Save the updated entity
+        return personnelRepository.save(personnel);
+    }
+
+    public Personnel changePassword(String username, String newPassword) {
+        Optional<Personnel> existingPersonnel = personnelRepository.findByUsername(username);
+        Personnel personnel = existingPersonnel.get();
+        if (personnel == null) {
+            throw new EntityNotFoundException("Personnel with username " + username + " not found");
+        }
+        System.out.println("*********************************");
+        System.out.println(newPassword.password);
+        // Encode the new password
+        String encodedPassword = new BCryptPasswordEncoder().encode(newPassword);
+
+        // Update the password
+        personnel.setPassword(encodedPassword);
+
+        // Save the updated entity
+        return personnelRepository.save(personnel);
+    }
+
+
 }

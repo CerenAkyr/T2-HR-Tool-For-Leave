@@ -6,7 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 function EditProfileButton() {
   let navigate = useNavigate();
   const editBtnHandler = () => {
-    navigate('/user/edit-profile');
+    navigate('/user/edit');
   }
   return (
     <Tooltip title="Profili Düzenle" className='actionBtn' onClick={editBtnHandler} style={{display: "flex"}} placement='top'>

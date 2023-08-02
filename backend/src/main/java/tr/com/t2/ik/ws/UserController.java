@@ -75,11 +75,31 @@ public class UserController {
 
     @PostMapping("/new-user")
     @CrossOrigin
-    public ResponseEntity<Personnel> createNewPersonnel(@RequestBody @Validated NewPersonnelDTO newPersonnelDTO) {
+    public Boolean createNewPersonnel(@RequestBody @Validated NewPersonnelDTO newPersonnelDTO) {
         Personnel newUser = personnelService.createUser(newPersonnelDTO);
-        System.out.println("-----------GELEN USER-------------");
-        System.out.println(newPersonnelDTO);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        if ( newUser != null )
+            return true;
+        return false;
     }
+
+    @PutMapping("/update/{username}")
+    @CrossOrigin
+    public ResponseEntity<Personnel> updatePersonnel(
+            @PathVariable String username,
+            @RequestBody @Validated NewPersonnelDTO updatePersonnelDTO) {
+        Personnel updatedPersonnel = personnelService.updatePersonnel(updatePersonnelDTO, username);
+        return new ResponseEntity<>(updatedPersonnel, HttpStatus.OK);
+    }
+
+    @PutMapping("/change-password/{username}")
+    @CrossOrigin
+    public ResponseEntity<Personnel> changePassword(
+            @PathVariable String username,
+            @RequestBody String newPassword) {
+        Personnel updatedPersonnel = personnelService.changePassword(username, newPassword);
+        return new ResponseEntity<>(updatedPersonnel, HttpStatus.OK);
+    }
+
+
 
 }

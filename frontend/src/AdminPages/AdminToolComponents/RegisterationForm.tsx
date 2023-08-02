@@ -16,6 +16,7 @@ import Radio from '@mui/material/Radio';
 import FormLabel from '@mui/material/FormLabel';
 import DatePickerValue from './StartDatePicker';
 import dayjs, { Dayjs } from 'dayjs';
+import Alert from '@mui/material/Alert';
 import "./StartDatePicker.css"
 
 export default function SignUp() {
@@ -25,17 +26,42 @@ export default function SignUp() {
     dayjs('1999-05-01')
   );
 
+  // state to show error:
+  const [error, setError] = React.useState(false);
+  const [errorText, setErrorText] = React.useState<string>("");
+
+  // state to show success:
+  const [success, setSuccess] = React.useState(false);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const requestBody ={
-      username: data.get('username'),
-      email: data.get('email'),
-      password: data.get('password'),
-      firstname: data.get('firstName'),
-      lastname: data.get('lastName'),
-      gender: data.get('gender'),
-      birthday: selectedDate,
+
+    // öncelikle boş field var mı diye bak, varsa hiç girişme bile
+    const username = data.get('username')?.toString();
+    const email = data.get('email')?.toString();
+    const password = data.get('password')?.toString();
+    const firstname = data.get('firstName')?.toString();
+    const lastname = data.get('lastName')?.toString();
+    const gender = data.get('gender')?.toString();
+    const birthday = selectedDate;
+
+    if (!username || !email || !password || !firstname || !lastname || !gender || !birthday ||
+      username.trim() === '' || email.trim() === '' || password.trim() === '' ||
+      firstname.trim() === '' || lastname.trim() === '' || gender.trim() === '') {
+      setError(true);
+      setErrorText("Lütfen tüm alanları doldurunuz!");
+      return;
+    }
+
+    const requestBody = {
+      username: username,
+      email: email,
+      password: password,
+      firstname: firstname,
+      lastname: lastname,
+      gender: gender,
+      birthday: birthday,
     };
 
     console.log("Request body: ", requestBody);
@@ -48,14 +74,22 @@ export default function SignUp() {
         Accept: 'application/json',
         Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
       },
-       body: JSON.stringify(requestBody),
+      body: JSON.stringify(requestBody),
     })
 
       .then((response) => {
-        if (response.status === 200) {
+        if (response) {
           console.log('Registration successful');
+          setSuccess(true);
+          setError(false);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000); // 2000 milliseconds = 2 seconds
         } else {
           console.log('Registration failed');
+          setError(true);
+          setSuccess(false);
+          setErrorText("Kayıt başarısız!");
         }
       }
       )
@@ -96,6 +130,14 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Kullanıcı Kaydı
           </Typography>
+          {error && (
+            <Alert severity='error' sx={{ mt: 1, mb: 2 }}>
+              {errorText}
+            </Alert>)}
+          {success && (
+            <Alert severity='success' sx={{ mt: 1, mb: 2 }}>
+              Kayıt başarılı!
+            </Alert>)}
           <Box
             component="form"
             noValidate

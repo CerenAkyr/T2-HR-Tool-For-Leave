@@ -18,6 +18,7 @@ import Unauthorized from "./Routing/Unauthorized";
 import IsAuthorized from "./Routing/IsAuthorized";
 import IsAuthorizedUser from "./Routing/IsAuthorizedUser";
 import MissingPage from "./Routing/MissingPage";
+import ChangePasswordPage from "./UserPages/ChangePasswordPage";
 
 function App() {
   //const role = sessionStorage.getItem("role");
@@ -41,7 +42,8 @@ function App() {
             <Route path="user/view-off" element={<ViewDaysOff />} />
             <Route path="user/add-off-days" element={<UserAddOffDay />} />
             <Route path="user/view-profile" element={<ViewProfile />} />
-            <Route path="user/edit-profile" element={<EditProfile />} />
+            <Route path="user/edit" element={<EditProfile />} />
+            <Route path="user/change-password" element={<ChangePasswordPage />} />
           </Route>
 
           {/* Catch Else */}

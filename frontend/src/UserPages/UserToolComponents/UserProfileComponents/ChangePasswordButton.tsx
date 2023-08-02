@@ -1,11 +1,13 @@
 import "./Profile.css";
 import LockIcon from '@mui/icons-material/Lock';
 import Tooltip from '@mui/material/Tooltip';
+import { useNavigate } from "react-router-dom";
 
 function ChangePasswordButton() {
 
+    let navigate = useNavigate();
     const pwdChangeHandler = () => {
-        console.log("Change Password Button Clicked")
+        navigate('/user/change-password');
     }
 
     return (
