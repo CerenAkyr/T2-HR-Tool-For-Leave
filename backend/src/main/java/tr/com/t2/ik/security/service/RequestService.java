@@ -21,9 +21,7 @@ public class RequestService {
 
     public ResponseEntity<?> addOffDays(OffDayRequest offDayRequest) {
         try {
-            // Burada iş mantığı ve veritabanı işlemleri
 
-            // Veritabanına kayıt işlemi
             requestRepository.save(offDayRequest);
 
             // Başarılı yanıt döndür
