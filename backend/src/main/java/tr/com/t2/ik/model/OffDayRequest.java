@@ -40,10 +40,10 @@ public class OffDayRequest {
     private Date excuseCreateDate;
 
 
-    @Column(name = "excuse_type")
+    @Column(name = "excuse_type", nullable = false)
     private String excuseType;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
     @Column(name = "update_date")
