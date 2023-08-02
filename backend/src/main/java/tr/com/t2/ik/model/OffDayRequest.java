@@ -7,13 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+
 
 @Data
 @Entity
+@Table(name = "requests")
 public class OffDayRequest {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
+
     private String requestId;
 
     @ManyToOne
@@ -58,17 +65,16 @@ public class OffDayRequest {
         this.token = token;
     }
 
+    public void setPersonnel(Personnel personnel) {
+        this.personnel = personnel;
+    }
 
 
+    public Date getExcuseCreateDate() {
+        return excuseCreateDate;
+    }
 
-
-
-
-
-
-
-
-
-
-
+    public void setExcuseCreateDate(Date excuseCreateDate) {
+        this.excuseCreateDate = excuseCreateDate;
+    }
 }

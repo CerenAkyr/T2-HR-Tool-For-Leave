@@ -17,11 +17,14 @@ function IconLabelButtons(props: IconLabelButtonsProps) {
  
   const handleSubmit = async () => {
     // Create the request body
+    const username = sessionStorage.getItem("username");
+
     const requestBody = {
-      excuse_type: props.excuseType,
-      excuse_start_day: props.excuseStartDate,
-      excuse_end_day: props.excuseEndDate,
+      excuseType: props.excuseType,
+      excuseStartDate: props.excuseStartDate,
+      excuseEndDate: props.excuseEndDate,
       description: props.description,
+      username: username,
     };
     console.log(sessionStorage.getItem('token'));
     console.log(requestBody);

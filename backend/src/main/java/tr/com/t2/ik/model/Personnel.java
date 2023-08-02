@@ -54,8 +54,7 @@ public class Personnel {
     @Column(name = "gender")
     private String gender;
 
-
-
-
-
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
