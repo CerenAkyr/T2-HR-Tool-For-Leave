@@ -139,7 +139,7 @@ public class T2UserDetailsService implements UserDetailsService {
             throw new EntityNotFoundException("Personnel with username " + username + " not found");
         }
         System.out.println("*********************************");
-        System.out.println(newPassword.password);
+        System.out.println(newPassword);
         // Encode the new password
         String encodedPassword = new BCryptPasswordEncoder().encode(newPassword);
 
