@@ -12,6 +12,7 @@ import FilterUsers from "./AdminToolComponents/FilterUsers";
 import { useState, useEffect } from 'react';
 import StickyFooter from "../StickyFooter";
 import SideBar from "./AdminNavigation/SideBar";
+import PeopleIcon from '@mui/icons-material/People';
 
 function AdminListUsersPage() {
 
@@ -133,7 +134,7 @@ function AdminListUsersPage() {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: '#9f5cbe' }}>
-              <RecentActorsOutlinedIcon />
+              <PeopleIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ mb: 3 }} >
               Kullanıcı Listesi

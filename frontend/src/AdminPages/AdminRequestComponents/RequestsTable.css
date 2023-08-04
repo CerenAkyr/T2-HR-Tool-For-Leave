@@ -1,5 +1,5 @@
 .requests__table__div {
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
     margin-top: 4vh;
     text-align: center;
@@ -32,7 +32,7 @@
 .filter {
     margin-top: 2vh;
     margin-bottom: 1vh;
-    margin-left: -66%;
+    margin-left: -56%;
     display: flex;
     
 }
