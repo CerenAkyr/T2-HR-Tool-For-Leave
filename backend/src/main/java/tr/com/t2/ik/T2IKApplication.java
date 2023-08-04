@@ -11,10 +11,9 @@ import tr.com.t2.ik.model.Role;
 import tr.com.t2.ik.repository.PersonnelRepository;
 import tr.com.t2.ik.repository.RequestRepository;
 import tr.com.t2.ik.repository.RoleRepository;
-import org.springframework.context.annotation.ComponentScan;
 
-import java.util.*;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @SpringBootApplication
@@ -38,6 +37,8 @@ public class T2IKApplication {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 
+            /*OffDayRequest selin = new OffDayRequest();
+            selin.setRequestStatus();*/
 
             Personnel mete = new Personnel();
             mete.setUsername("metehan.danaci");
@@ -104,6 +105,22 @@ public class T2IKApplication {
             Date cerenBirthday = formatter.parse(cerenStringBirthday);
             ceren.setBirthday(cerenBirthday);
 
+            Personnel sena = new Personnel();
+            sena.setUsername("sena");
+            sena.setPassword(new BCryptPasswordEncoder().encode("sena"));
+            sena.setRoles(new HashSet<>(Collections.singletonList(user)));
+            sena.setActivity("Pasif");
+            sena.setFirstname("Sena");
+            sena.setLastname("Oğuz");
+            sena.setEmail("senaoguz@t2.com.tr");
+            sena.setGender("Kadın");
+            String senaStringStartDate = "2021-07-22";
+            Date senaStartDate = formatter.parse(senaStringStartDate);
+            sena.setStartDate(senaStartDate);
+            String senaStringBirthday = "1997-03-23";
+            Date senaBirthday = formatter.parse(senaStringBirthday);
+            sena.setBirthday(senaBirthday);
+
             Personnel baris = new Personnel();
             baris.setUsername("baris.poyraz");
             baris.setPassword(new BCryptPasswordEncoder().encode("baris"));
@@ -120,7 +137,7 @@ public class T2IKApplication {
             Date barisBirthday = formatter.parse(barisStringBirthday);
             baris.setBirthday(barisBirthday);
 
-            personnelRepository.saveAll(Arrays.asList(mete,tan,selin,ceren,baris));
+            personnelRepository.saveAll(Arrays.asList(mete,tan,selin,ceren,baris,sena));
 
             Optional<Personnel> personnel = personnelRepository.findByUsername("ceren"); // Replace with an actual username
             Personnel existingPers = personnel.get();
