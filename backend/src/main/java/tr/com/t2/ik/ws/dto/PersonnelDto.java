@@ -20,4 +20,5 @@ public class PersonnelDto {
         private String activity;
         private String email;
         private String gender;
+        private String requestStatus;
 }

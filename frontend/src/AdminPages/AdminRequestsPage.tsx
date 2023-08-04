@@ -24,15 +24,24 @@ function AdminRequestsPage() {
     },
   });
   type Input = {
-    id: number,
-    fname: string,
-    lname: string,
+
+    personnel: Personnel, 
+    requestId: number,
+    excuseStartDate: string,
+    excuseEndDate: string,
+    excuseType: string,
+    requestStatus: string,
+    
+    
+}
+
+type Personnel = {
+    firstname: string,
+    lastname: string,
     email: string,
-    startDate: string,
-    endDate: string,
-    reason: string,
-    status: string
-  }
+    username: string,
+
+}
 
 
   type requestArray = Input[];
@@ -47,53 +56,77 @@ function AdminRequestsPage() {
   // state for filtered requests:
   const [filteredRequests, setFilteredRequests] = useState<requestArray>(requests);
 
+  // to show loading animation:
+  
+
+
+  //console.log(sessionStorage.getItem('token'));
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
       try {
-        const response = await fetch('http://localhost:3001/admin/get-requests');
-        if (!response.ok) {
-          console.log("hataaaaaa")
+        const token = sessionStorage.getItem('token'); // Replace this with your actual token
+        console.log(token);
+        setIsLoading(true);
+        const response = await fetch('http://localhost:8080/api/pendingrequests', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
+          },
+        });
+
+        if (response.status === 401) {
+          console.log('Authentication failed: Invalid credentials');
+          setError(true);
+          setIsLoading(false);
+        } else if (!response.ok) {
+          setError(true);
+          setIsLoading(false);
+          console.log(`Error! status: ${response.status}`);
+        } else {
+          setError(false);
+          setIsLoading(false);
+          const responseData = await response.json();
+          setRequests(responseData);
         }
-        const data = await response.json();
-        setRequests(data);
-        console.log(data);
-        setIsLoading(false)
-        setError(false)
-      } catch (error) {
-        setError(true)
-        setIsLoading(false)
+      } catch (e) {
+        console.log('Error', e);
       }
     };
+
     fetchData();
   }, []);
 
+
   useEffect(
     () => {
-      setFilteredRequests(requests.filter((request) => request.status === "pending"));
+      console.log("requests: ");
+    console.log(requests);
+      setFilteredRequests(requests.filter((request) => request.requestStatus === "Pending"));
     }, [requests]
   )
 
 
   // function for filtering requests:
   const filterRequests = (filter: string) => {
-    if (filter === "pending") {
-      const filteredRequestsVar = requests.filter((request) => request.status === "pending");
+    if (filter === "Pending") {
+      const filteredRequestsVar = requests.filter((request) => request.requestStatus === "Pending");
       setFilteredRequests(filteredRequestsVar);
-    } else if (filter === "approved") {
-      const filteredRequestsVar = requests.filter((request) => request.status === "approved");
+    } else if (filter === "Approved") {
+      const filteredRequestsVar = requests.filter((request) => request.requestStatus === "Approved");
       setFilteredRequests(filteredRequestsVar);
-    } else if (filter === "rejected") {
-      const filteredRequestsVar = requests.filter((request) => request.status === "rejected");
+    } else if (filter === "Rejected") {
+      const filteredRequestsVar = requests.filter((request) => request.requestStatus === "Rejected");
       setFilteredRequests(filteredRequestsVar);
-    } else if (filter === "all") {
+    } else if (filter === "All") {
       setFilteredRequests(requests);
     }
     console.log(filter);
     console.log(filteredRequests);
   }
 
-  const [filter, setFilter] = useState<string>("pending");
+  const [filter, setFilter] = useState<string>("Pending");
 
   const filterHandler = (value: string) => {
     setFilter(value);

@@ -6,7 +6,14 @@ import tr.com.t2.ik.model.Personnel;
 
 import java.util.Optional;
 
+import java.util.List;
+
 @Repository
 public interface RequestRepository extends JpaRepository <OffDayRequest, Long> {
+
     Optional<OffDayRequest> findOffDayRequestByPersonnel(Personnel personnel);
+
+
+    List<OffDayRequest> findByRequestStatus(String pending);
+
 }

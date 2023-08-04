@@ -17,5 +17,10 @@ public class RequestDto {
     private Date excuseEndDate;
     private String excuseType;
     private String description;
+    private Long requestId;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String requestStatus;
 
 }

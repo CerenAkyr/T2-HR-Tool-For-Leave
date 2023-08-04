@@ -2,14 +2,22 @@ package tr.com.t2.ik.security.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import tr.com.t2.ik.mapper.AutoRequestMapper;
+
+import tr.com.t2.ik.mapper.AutoPersonnelMapper;
+
 import tr.com.t2.ik.model.OffDayRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import tr.com.t2.ik.model.Personnel;
 import tr.com.t2.ik.repository.RequestRepository;
 import tr.com.t2.ik.ws.dto.PersonnelDto;
+
 import tr.com.t2.ik.ws.dto.RequestCalendarDTO;
+
+import tr.com.t2.ik.ws.dto.RequestDto;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +47,13 @@ public class RequestService {
         }
     }
 
+    public Iterable<OffDayRequest> getAllRequests() {
+        Iterable<OffDayRequest> requests = requestRepository.findAll();
+        return  requests; // Convert Iterable to Stream
+
+
+    }
+
     // Diğer iş mantığı ve veritabanı işlemleri için gerekli metotlar
 
 
@@ -49,10 +64,17 @@ public class RequestService {
                 .collect(Collectors.toList());
     }*/
 
-    public List<RequestCalendarDTO> getAllRequests() {
+    public List<RequestCalendarDTO> getAllRequeststoCalendar() {
         List<OffDayRequest> requests = requestRepository.findAll();
         return StreamSupport.stream(requests.spliterator(), false)
                 .map(request -> AutoRequestMapper.MAPPER.mapToRequestCalendarDto(request))
                 .collect(Collectors.toList());
     }
+
+    public List<OffDayRequest> getAllRequests() {
+        List<OffDayRequest> requests = requestRepository.findAll();
+        return requests;
+    }
+
+
 }

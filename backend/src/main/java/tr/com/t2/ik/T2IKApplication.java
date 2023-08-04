@@ -11,6 +11,7 @@ import tr.com.t2.ik.model.Role;
 import tr.com.t2.ik.repository.PersonnelRepository;
 import tr.com.t2.ik.repository.RequestRepository;
 import tr.com.t2.ik.repository.RoleRepository;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.*;
 import java.text.SimpleDateFormat;

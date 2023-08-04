@@ -11,14 +11,21 @@ import DescriptionButton from './DescriptionButton';
 import DeleteRequestButton from './DeleteRequestButton';
 
 type Input = {
-    id: number,
-    fname: string,
-    lname: string,
+    personnel: Personnel, 
+    requestId: number,
+    excuseStartDate: string,
+    excuseEndDate: string,
+    excuseType: string,
+    requestStatus: string,
+    
+}
+
+type Personnel = {
+    firstname: string,
+    lastname: string,
     email: string,
-    startDate: string,
-    endDate: string,
-    reason: string,
-    status: string
+    username: string,
+
 }
 
 type requestArray = Input[];
@@ -32,7 +39,7 @@ function RequestsTable(props: RequestsTableProps) {
     return (
         <div className='requests__table__div'>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650}} aria-label="users table"  >
+                <Table sx={{ width: 650}} aria-label="users table"  >
                     <TableHead>
                         <TableRow>
                             <TableCell align="center">Ad</TableCell>
@@ -46,23 +53,22 @@ function RequestsTable(props: RequestsTableProps) {
                     <TableBody>
                         {props.requests && props.requests.length > 0 && props.requests.map((row: Input) => (
                             <TableRow
-                                key={row.id}
+                                key={row.requestId}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell align="center" component="th" scope="row">
-                                    {row.fname}
+                                    {row.personnel.firstname}
                                 </TableCell>
                                 <TableCell align="center" component="th" scope="row">
-                                    {row.lname}
+                                    {row.personnel.lastname}
                                 </TableCell>
-                                <TableCell align="center">{row.email}</TableCell>
-                                <TableCell align="center">{row.startDate}</TableCell>
-                                <TableCell align="center">{row.endDate}</TableCell>
+                                <TableCell align="center">{row.personnel.email}</TableCell>
+                                <TableCell align="center">{row.excuseStartDate}</TableCell>
+                                <TableCell align="center">{row.excuseEndDate}</TableCell>
                                 <TableCell align="center">
                                     <div className='request__button__holder'>
-                                        <DescriptionButton startDate={row.startDate} endDate={row.endDate} reason={row.reason} status={row.status}/>
-                                        {row.status === "pending" && <ApproveButton />}
-                                        {row.status === "pending" && <DeleteRequestButton />}
+                                        {row.requestStatus === "Pending" && <ApproveButton />}
+                                        {row.requestStatus === "Pending" && <DeleteRequestButton />}
                                     </div>
 
                                 </TableCell>

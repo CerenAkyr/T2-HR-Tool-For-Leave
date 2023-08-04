@@ -26,6 +26,7 @@ public class OffDayRequest {
     @JoinColumn(name = "username")
     private Personnel personnel;
 
+
     @Column
     private String requestStatus;
 

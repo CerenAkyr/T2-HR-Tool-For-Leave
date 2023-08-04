@@ -6,8 +6,8 @@ import tr.com.t2.ik.ws.dto.PersonnelDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-08-03T12:13:50+0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
+    date = "2023-08-04T10:20:19+0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class AutoPersonnelMapperImpl implements AutoPersonnelMapper {
 

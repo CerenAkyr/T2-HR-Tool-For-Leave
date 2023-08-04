@@ -1,7 +1,6 @@
 package tr.com.t2.ik.security.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,14 +13,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import tr.com.t2.ik.security.JwtAuthenticationEntryPoint;
 import tr.com.t2.ik.security.filter.JwtRequestFilter;
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ComponentScan(basePackages = "tr.com.t2.ik")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private JwtRequestFilter jwtRequestFilter;
     private UserDetailsService userDetailsService;
+
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
     public WebSecurityConfig(
             JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
