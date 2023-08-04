@@ -96,7 +96,7 @@ public class RequestController {
     @CrossOrigin
     @GetMapping("/api/pendingrequests")
     public List<OffDayRequest> getPendingRequests() {
-        List<OffDayRequest> pendingRequests = requestRepository.findByRequestStatus("Pending");
+        List<OffDayRequest> pendingRequests = requestRepository.findAll();
         return pendingRequests;
     }
 

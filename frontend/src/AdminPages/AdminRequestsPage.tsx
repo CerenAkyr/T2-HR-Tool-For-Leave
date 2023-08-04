@@ -89,6 +89,8 @@ type Personnel = {
           setIsLoading(false);
           const responseData = await response.json();
           setRequests(responseData);
+          console.log("responseData: ", responseData);
+          
         }
       } catch (e) {
         console.log('Error', e);
