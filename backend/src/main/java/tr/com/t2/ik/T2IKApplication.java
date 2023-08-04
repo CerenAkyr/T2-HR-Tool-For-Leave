@@ -60,7 +60,7 @@ public class T2IKApplication {
             tan.setUsername("tan.apaydin");
             tan.setPassword(new BCryptPasswordEncoder().encode("tan"));
             tan.setRoles(new HashSet<>(Collections.singletonList(user)));
-            tan.setActivity("Pasif");
+            tan.setActivity("Aktif");
             tan.setFirstname("Tan");
             tan.setLastname("Apaydın");
             tan.setEmail("tanapaydin@t2.com.tr");
@@ -104,7 +104,23 @@ public class T2IKApplication {
             Date cerenBirthday = formatter.parse(cerenStringBirthday);
             ceren.setBirthday(cerenBirthday);
 
-            personnelRepository.saveAll(Arrays.asList(mete,tan,selin,ceren));
+            Personnel baris = new Personnel();
+            baris.setUsername("baris.poyraz");
+            baris.setPassword(new BCryptPasswordEncoder().encode("baris"));
+            baris.setRoles(new HashSet<>(Collections.singletonList(user)));
+            baris.setActivity("Pasif");
+            baris.setFirstname("Barış");
+            baris.setLastname("Poyraz");
+            baris.setEmail("barispoyraz@t2.com.tr");
+            baris.setGender("Erkek");
+            String barisStringStartDate = "2019-06-16";
+            Date barisStartDate = formatter.parse(barisStringStartDate);
+            baris.setStartDate(barisStartDate);
+            String barisStringBirthday = "1996-03-05";
+            Date barisBirthday = formatter.parse(barisStringBirthday);
+            baris.setBirthday(barisBirthday);
+
+            personnelRepository.saveAll(Arrays.asList(mete,tan,selin,ceren,baris));
 
             Optional<Personnel> personnel = personnelRepository.findByUsername("ceren"); // Replace with an actual username
             Personnel existingPers = personnel.get();
