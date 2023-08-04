@@ -11,7 +11,6 @@ interface DescriptionButtonProps {
     status: string
 }
 
-
 function DescriptionButton(props: DescriptionButtonProps) {
 
     // açıklama göstermek için stateler:
@@ -33,6 +32,15 @@ function DescriptionButton(props: DescriptionButtonProps) {
 
     const [isHovered, setIsHovered] = useState<boolean>(false);
 
+    const startDate = new Date(props.startDate.split('/').reverse().join('/')) as Date;
+    const endDate = new Date(props.endDate.split('/').reverse().join('/')) as Date;
+
+    // Calculate the time difference in milliseconds
+    const timeDifferenceInMilliseconds:number = endDate.getTime() - startDate.getTime();
+    // Convert milliseconds to days
+    const millisecondsPerDay = 1000 * 60 * 60 * 24; // Milliseconds in a day
+    const daysDifference = Math.floor(timeDifferenceInMilliseconds / millisecondsPerDay);
+
     return (
         <div>
             <Modal show={showDescription} onHide={handleClose}>
@@ -40,10 +48,10 @@ function DescriptionButton(props: DescriptionButtonProps) {
                     <Modal.Title>Detaylar</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <strong>Durum:</strong> {props.status }<br></br>
+                    <strong>Durum:</strong> {props.status}<br></br>
                     <strong>Başlangıç tarihi:</strong> {props.startDate} <br></br>
                     <strong>Bitiş tarihi:</strong> {props.endDate} <br></br>
-                    <strong>Toplam gün sayısı:</strong> {props.endDate} - {props.startDate} <br></br>
+                    <strong>Toplam gün sayısı:</strong> {daysDifference} <br></br>
                     <strong>Açıklama:</strong> {props.reason === "" ? "Belirtilmemiş" : props.reason}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

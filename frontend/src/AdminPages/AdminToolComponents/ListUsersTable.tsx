@@ -52,7 +52,7 @@ function ListUsersTable( { users }: UserProps ) {
                                     {row.lastname}
                                 </TableCell>
                                 <TableCell align="center">{row.email}</TableCell>
-                                <TableCell align="center">{row.birthday.toString()}</TableCell>
+                                <TableCell align="center">{new Date(row.birthday).toLocaleDateString('en-GB')}</TableCell>
                                 <TableCell align="center">{row.gender}</TableCell>
                                 <TableCell align="center">
                                     <div className='request__button__holder'>
