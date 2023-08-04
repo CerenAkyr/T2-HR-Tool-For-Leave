@@ -104,7 +104,7 @@ function AdminListUsersPage() {
     filterUsers(filter)
   }
 
-  // function for filtering requests:
+  // function for filtering users:
   const filterUsers = (filter: string) => {
     if (filter === "Aktif") {
       const filteredRequestsVar = users.filter((user) => user.activity === "Aktif");
