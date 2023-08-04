@@ -240,7 +240,7 @@ export default function EditUserForm({ user, usernameOfEdit }: UserProps) {
                                         Cinsiyet
                                     </FormLabel>
                                     <RadioGroup
-                                        sx={{ justifyContent: 'center' }} // Center the radio buttons horizontally
+                                        sx={{ justifyContent: 'center', pl: 14 }} // Center the radio buttons horizontally
                                         aria-label="gender"
                                         name="gender"
                                         row
