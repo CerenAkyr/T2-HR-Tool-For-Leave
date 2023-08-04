@@ -5,15 +5,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import tr.com.t2.ik.model.OffDayRequest;
 import tr.com.t2.ik.model.Personnel;
 import tr.com.t2.ik.model.Role;
 import tr.com.t2.ik.repository.PersonnelRepository;
+import tr.com.t2.ik.repository.RequestRepository;
 import tr.com.t2.ik.repository.RoleRepository;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Date;
+import java.util.*;
 import java.text.SimpleDateFormat;
 
 
@@ -25,7 +24,7 @@ public class T2IKApplication {
     }
 
     @Bean
-    public CommandLineRunner addTestUsers (PersonnelRepository personnelRepository, RoleRepository roleRepository) {
+    public CommandLineRunner addTestUsers (PersonnelRepository personnelRepository, RoleRepository roleRepository, RequestRepository offDayRequestRepository) {
         return (args) -> {
 
             Role admin = new Role();
@@ -105,6 +104,32 @@ public class T2IKApplication {
             ceren.setBirthday(cerenBirthday);
 
             personnelRepository.saveAll(Arrays.asList(mete,tan,selin,ceren));
+
+            Optional<Personnel> personnel = personnelRepository.findByUsername("ceren"); // Replace with an actual username
+            Personnel existingPers = personnel.get();
+
+            OffDayRequest request1 = new OffDayRequest();
+
+            request1.setPersonnel(existingPers);
+            request1.setRequestStatus("Pending");
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(2023, Calendar.JULY, 31); // Set the year, month, and day for the start date
+            request1.setExcuseStartDate(calendar.getTime());
+
+            calendar.set(2023, Calendar.AUGUST, 5); // Set the year, month, and day for the end date
+            request1.setExcuseEndDate(calendar.getTime());
+
+            calendar.set(2023, Calendar.JULY, 30); // Set the year, month, and day for the create date
+            request1.setExcuseCreateDate(calendar.getTime());
+
+            request1.setExcuseType("Vacation");
+            request1.setDescription("Vacation request description.");
+            request1.setUpdateDay(new Date());
+
+            // Save request1 to the database
+            offDayRequestRepository.save(request1);
+
         };
     }
 }

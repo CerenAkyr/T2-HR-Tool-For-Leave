@@ -2,7 +2,6 @@ package tr.com.t2.ik.ws;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 import tr.com.t2.ik.model.OffDayRequest;
 import tr.com.t2.ik.repository.RequestRepository;
@@ -12,7 +11,11 @@ import tr.com.t2.ik.model.Personnel;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+
+import tr.com.t2.ik.security.service.RequestService;
+import tr.com.t2.ik.ws.dto.RequestCalendarDTO;
 import tr.com.t2.ik.ws.dto.RequestDto;
 
 
@@ -27,6 +30,9 @@ public class RequestController {
 
     @Autowired
     private PersonnelRepository personnelRepository;
+
+    @Autowired
+    private RequestService requestService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -63,6 +69,12 @@ public class RequestController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Personnel not found.");
         }
+    }
+
+    @GetMapping("/info")
+    @CrossOrigin
+    public List<RequestCalendarDTO> getAllRequests() {
+        return requestService.getAllRequests();
     }
 }
 

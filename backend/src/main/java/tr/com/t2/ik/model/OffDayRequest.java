@@ -20,7 +20,6 @@ public class OffDayRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-
     private String requestId;
 
     @ManyToOne
