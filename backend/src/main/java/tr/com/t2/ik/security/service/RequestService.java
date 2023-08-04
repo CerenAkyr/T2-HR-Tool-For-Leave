@@ -19,7 +19,10 @@ import tr.com.t2.ik.ws.dto.RequestCalendarDTO;
 import tr.com.t2.ik.ws.dto.RequestDto;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -75,6 +78,40 @@ public class RequestService {
         List<OffDayRequest> requests = requestRepository.findAll();
         return requests;
     }
+
+    @Transactional
+    public OffDayRequest acceptRequest(Long requestID) {
+        //long convertedLong = Long.parseLong(requestID);
+        Optional<OffDayRequest> requestOptional = requestRepository.findById(requestID);
+        System.out.println(requestOptional);
+        OffDayRequest request = requestOptional.get();
+        request.setRequestStatus("Approved");
+        return requestRepository.save(request);
+    }
+
+    @Transactional
+    public OffDayRequest rejectRequest(Long requestID) {
+        Optional<OffDayRequest> requestOptional = requestRepository.findById(requestID);
+        System.out.println(requestOptional);
+        OffDayRequest request = requestOptional.get();
+        request.setRequestStatus("Rejected");
+        return requestRepository.save(request);
+    }
+
+    /*
+    @Transactional
+    public OffDayRequest rejectRequest(OffDayRequest request) {
+        Optional<Personnel> userOptional = personnelRepository.findByUsername(username);
+
+        if (userOptional.isPresent()) {
+            Personnel user = userOptional.get();
+            user.setActivity("Aktif");
+            return personnelRepository.save(user);
+        }
+        return null; // User not found
+    }
+
+     */
 
 
 }

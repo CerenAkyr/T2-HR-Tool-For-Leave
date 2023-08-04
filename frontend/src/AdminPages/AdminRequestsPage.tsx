@@ -122,8 +122,8 @@ type Personnel = {
     } else if (filter === "All") {
       setFilteredRequests(requests);
     }
-    console.log(filter);
-    console.log(filteredRequests);
+    console.log("filter: " , filter);
+    console.log("filteredReqs: ", filteredRequests);
   }
 
   const [filter, setFilter] = useState<string>("Pending");

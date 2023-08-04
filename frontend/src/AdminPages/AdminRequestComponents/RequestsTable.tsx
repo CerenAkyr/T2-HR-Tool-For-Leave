@@ -67,12 +67,11 @@ function RequestsTable(props: RequestsTableProps) {
                                 <TableCell align="center">{row.excuseEndDate}</TableCell>
                                 <TableCell align="center">
                                     <div className='request__button__holder'>
-                                        {row.requestStatus === "Pending" && <ApproveButton />}
-                                        {row.requestStatus === "Pending" && <DeleteRequestButton />}
+                                        {row.requestStatus === "Pending" && <ApproveButton requestID={row.requestId}/>}
+                                        {row.requestStatus === "Pending" && <DeleteRequestButton requestID={row.requestId}/>}
+                                        {/*<DescriptionButton startDate={row.excuseStartDate} endDate={row.excuseEndDate} status={row.requestStatus} reason={row./>*/}
                                     </div>
-
                                 </TableCell>
-
                             </TableRow>
                         ))}
                     </TableBody>

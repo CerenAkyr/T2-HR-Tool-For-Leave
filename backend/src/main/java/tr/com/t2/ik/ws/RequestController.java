@@ -89,8 +89,9 @@ public class RequestController {
     }
 
     @Autowired
-    public RequestController(RequestRepository requestRepository) {
+    public RequestController(RequestRepository requestRepository, RequestService requestService) {
         this.requestRepository = requestRepository;
+        this.requestService = requestService;
     }
     @CrossOrigin
     @GetMapping("/api/pendingrequests")
@@ -103,6 +104,25 @@ public class RequestController {
     @CrossOrigin
     public List<RequestCalendarDTO> getAllRequests() {
         return requestService.getAllRequeststoCalendar();
+    }
+
+    @PostMapping("/api/accept/{requestID}")
+    @CrossOrigin
+    public OffDayRequest approveRequest(@PathVariable("requestID") Long requestID) {
+        System.out.println("buraya geldim ben");
+        System.out.println(requestID);
+        if ( requestService.acceptRequest(requestID) != null )
+            return requestService.acceptRequest(requestID);
+        return null;
+    }
+
+    @PostMapping("/api/reject/{requestID}")
+    @CrossOrigin
+    public OffDayRequest rejectRequest(@PathVariable("requestID") Long requestID) {
+        System.out.println(requestID);
+        if ( requestService.rejectRequest(requestID) != null )
+            return requestService.rejectRequest(requestID);
+        return null;
     }
 }
 

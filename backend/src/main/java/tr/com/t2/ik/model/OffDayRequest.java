@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
@@ -20,7 +21,7 @@ public class OffDayRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private String requestId;
+    private Long requestId;
 
     @ManyToOne
     @JoinColumn(name = "username")
