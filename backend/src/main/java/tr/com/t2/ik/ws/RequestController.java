@@ -99,7 +99,7 @@ public class RequestController {
         return pendingRequests;
     }
 
-    @GetMapping("/info")
+    @GetMapping("/calendar/info")
     @CrossOrigin
     public List<RequestCalendarDTO> getAllRequests() {
         return requestService.getAllRequeststoCalendar();

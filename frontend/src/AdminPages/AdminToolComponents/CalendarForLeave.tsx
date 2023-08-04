@@ -4,7 +4,7 @@ import type { CalendarMode } from 'antd/es/calendar/generateCalendar';
 import type { Dayjs } from 'dayjs';
 import type { CellRenderInfo } from 'rc-picker/lib/interface';
 import type { BadgeProps } from 'antd';
-import "../AdminPages.css";
+import "./Calendar.css";
 
 const CalendarForLeave: React.FC = () => {
 
@@ -18,24 +18,20 @@ const CalendarForLeave: React.FC = () => {
       case 8:
         listData = [
           { type: 'warning', content: 'Ceren' },
-          { type: 'success', content: 'This is usual event.' },
+          { type: 'success', content: 'Selin' },
+        ];
+        break;
+      case 9:
+        listData = [
+          { type: 'warning', content: 'Ceren' },
+          { type: 'success', content: 'Selin' },
         ];
         break;
       case 10:
         listData = [
-          { type: 'warning', content: 'This is warning event.' },
-          { type: 'success', content: 'This is usual event.' },
-          { type: 'error', content: 'This is error event.' },
-        ];
-        break;
-      case 15:
-        listData = [
-          { type: 'warning', content: 'This is warning event' },
-          { type: 'success', content: 'This is very long usual event。。....' },
-          { type: 'error', content: 'This is error event 1.' },
-          { type: 'error', content: 'This is error event 2.' },
-          { type: 'error', content: 'This is error event 3.' },
-          { type: 'error', content: 'This is error event 4.' },
+          { type: 'warning', content: 'Ceren' },
+          { type: 'success', content: 'Selin' },
+          { type: 'error', content: 'Tan' },
         ];
         break;
       default:
@@ -62,16 +58,15 @@ const CalendarForLeave: React.FC = () => {
   };
 
 
-
-
   // according to the role, fetch only user's leave or all leaves:
   const role = sessionStorage.getItem('role');
-  if (role === 'ROLE_ADMIN') {
+  //if (role === 'ROLE_ADMIN') {
     // fetch all leaves
-  } else {
+  //} else {
     // fetch only user's leaves
     
-  }
+    
+  //}
 
   return (
     <div>

@@ -138,7 +138,7 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email"
+              label="Kullanıcı Adı"
               name="email"
               autoComplete="email"
               autoFocus
@@ -152,10 +152,6 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Beni Hatırla"
             />
             <Button className="button" style={{ verticalAlign: 'middle' }}
               type="submit"
