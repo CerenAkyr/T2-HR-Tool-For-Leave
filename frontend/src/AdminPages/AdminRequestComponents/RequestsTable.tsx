@@ -64,13 +64,13 @@ function RequestsTable(props: RequestsTableProps) {
                                     {row.personnel.lastname}
                                 </TableCell>
                                 <TableCell align="center">{row.personnel.email}</TableCell>
-                                <TableCell align="center">{row.excuseStartDate}</TableCell>
-                                <TableCell align="center">{row.excuseEndDate}</TableCell>
+                                <TableCell align="center">{new Date(row.excuseStartDate).toLocaleDateString('en-GB')}</TableCell>
+                                <TableCell align="center">{new Date(row.excuseEndDate).toLocaleDateString('en-GB')}</TableCell>
                                 <TableCell align="center">
                                     <div className='request__button__holder'>
                                         {row.requestStatus === "Pending" && <ApproveButton requestID={row.requestId}/>}
                                         {row.requestStatus === "Pending" && <DeleteRequestButton requestID={row.requestId}/>}
-                                        <DescriptionButton startDate={row.excuseStartDate} endDate={row.excuseEndDate} status={row.requestStatus === 'Pending' ? 'Bekliyor' : 
+                                        <DescriptionButton startDate={new Date(row.excuseStartDate).toLocaleDateString('en-GB')} endDate={new Date(row.excuseEndDate).toLocaleDateString('en-GB')} status={row.requestStatus === 'Pending' ? 'Bekliyor' : 
                                     row.requestStatus === 'Approved' ? 'Onaylandı' : 
                                     row.requestStatus === 'Rejected' ? 'Reddedildi' : row.requestStatus} reason={row.description} />
                                     </div>
