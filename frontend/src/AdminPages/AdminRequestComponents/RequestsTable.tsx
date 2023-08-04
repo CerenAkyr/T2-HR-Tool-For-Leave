@@ -17,6 +17,7 @@ type Input = {
     excuseEndDate: string,
     excuseType: string,
     requestStatus: string,
+    description : string,
     
 }
 
@@ -69,7 +70,9 @@ function RequestsTable(props: RequestsTableProps) {
                                     <div className='request__button__holder'>
                                         {row.requestStatus === "Pending" && <ApproveButton requestID={row.requestId}/>}
                                         {row.requestStatus === "Pending" && <DeleteRequestButton requestID={row.requestId}/>}
-                                        {/*<DescriptionButton startDate={row.excuseStartDate} endDate={row.excuseEndDate} status={row.requestStatus} reason={row./>*/}
+                                        <DescriptionButton startDate={row.excuseStartDate} endDate={row.excuseEndDate} status={row.requestStatus === 'Pending' ? 'Bekliyor' : 
+                                    row.requestStatus === 'Approved' ? 'Onaylandı' : 
+                                    row.requestStatus === 'Rejected' ? 'Reddedildi' : row.requestStatus} reason={row.description} />
                                     </div>
                                 </TableCell>
                             </TableRow>
