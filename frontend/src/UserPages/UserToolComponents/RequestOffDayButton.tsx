@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
 import "./RequestOffdayButton.css";
 import dayjs, { Dayjs } from 'dayjs';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Alert from '@mui/material/Alert';
 
 interface IconLabelButtonsProps {
   excuseType: string;
-  excuseStartDate: Dayjs | null; 
+  excuseStartDate: Dayjs | null;
   excuseEndDate: Dayjs | null;
   description: string;
 }
 
+
+
 function IconLabelButtons(props: IconLabelButtonsProps) {
- 
+
+  const [showMsg, setShowMsg] = useState(false);
+
+  const [fillBlanks, setFillBlanks] = useState(false);
+
   const handleSubmit = async () => {
+    // Check if all fields are filled
+    if (props.excuseType === "" || props.excuseStartDate === null || props.excuseEndDate === null || props.description === "") {
+      setFillBlanks(true);
+      return;
+    }
     // Create the request body
     const username = sessionStorage.getItem("username");
 
@@ -30,9 +41,9 @@ function IconLabelButtons(props: IconLabelButtonsProps) {
     console.log(requestBody);
 
     try {
-      const token = sessionStorage.getItem('token'); 
+      const token = sessionStorage.getItem('token');
       console.log(token);
-      
+
       const response = await fetch('http://localhost:8080/api/off', {
         method: 'POST',
         headers: {
@@ -45,20 +56,28 @@ function IconLabelButtons(props: IconLabelButtonsProps) {
       if (response.ok) {
         // Handle success
         console.log('Off day request sent successfully');
+        setShowMsg(true);
+        setFillBlanks(false);
+        setTimeout(() => {
+
+          window.location.reload();
+        }, 1000); // 1200 milliseconds = 1.2 seconds
       } else {
         // Handle error
+        setShowMsg(false);
+        setFillBlanks(false);
         console.log('Error sending off day request');
       }
     } catch (error) {
       console.error('Error sending off day request:', error);
     }
 
-    
+
   };
 
   return (
-    <div className="button-container" style={{ height: 40, marginTop: 65 }}>
-      <Stack direction="row" spacing={2}>
+    <div className="" style={{ height: 40, marginTop: 65 }}>
+      <Stack direction="column" spacing={2}>
         <Button
           className='button'
           variant="contained"
@@ -67,6 +86,16 @@ function IconLabelButtons(props: IconLabelButtonsProps) {
         >
           İstek Oluştur
         </Button>
+        {showMsg &&
+          <Alert severity="success">
+            İstek başarıyla oluşturuldu!
+          </Alert>
+        }
+        {fillBlanks &&
+          <Alert severity="error">
+            Lütfen tüm alanları doldurunuz!
+          </Alert>
+        }
       </Stack>
     </div>
   );

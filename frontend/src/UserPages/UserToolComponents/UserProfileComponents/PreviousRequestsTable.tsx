@@ -28,10 +28,6 @@ type Personnel = {
 
 type previousRequestArray = Input[];
 
-interface PreviousRequestsTableProps {
-    previousRequests: previousRequestArray;
-  }
-
 function PreviousRequestsTable() {
     
     // state to fetch users:
@@ -99,16 +95,16 @@ function PreviousRequestsTable() {
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row" align='center'>
-                                    {row.excuseStartDate}
+                                    {new Date(row.excuseStartDate).toLocaleDateString('en-GB')}
                                 </TableCell>
-                                <TableCell align="center">{row.excuseEndDate}</TableCell>
-                                <TableCell align="center">
+                                <TableCell align="center">{new Date(row.excuseEndDate).toLocaleDateString('en-GB')}</TableCell>
+                                <TableCell align="center" style={{color: row.requestStatus === 'Pending' ? 'orange' : 
+                                    row.requestStatus === 'Approved' ? 'green' : 
+                                    row.requestStatus === 'Rejected' ? 'red' : row.requestStatus}}>
                                     {row.requestStatus === 'Pending' ? 'Bekliyor' : 
                                     row.requestStatus === 'Approved' ? 'Onaylandı' : 
                                     row.requestStatus === 'Rejected' ? 'Reddedildi' : row.requestStatus}
                                 </TableCell>
-
-
                             </TableRow>
                         ))}
                     </TableBody>

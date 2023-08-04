@@ -161,13 +161,6 @@ export default function SignIn() {
             >
               Oturum Aç
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2" paddingLeft={18} >
-                  Şifremi Unuttum
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
           {errorMessage !== "" && <Alert sx={{ margin: 4 }} severity="error"><AlertTitle>Giriş Hatası</AlertTitle>{errorMessage}</Alert>}
           <Copyright />

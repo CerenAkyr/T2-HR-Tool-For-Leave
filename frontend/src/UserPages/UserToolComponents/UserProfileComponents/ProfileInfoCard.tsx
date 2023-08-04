@@ -84,7 +84,7 @@ export default function ProfileInfoCard() {
                                 <MDBRow className="pt-1">
                                     <MDBCol size="6" className="mb-3">
                                         <MDBTypography tag="h6">Doğum Günü</MDBTypography>
-                                        <MDBCardText className="text-muted">{userInfo?.birthday.toString()}</MDBCardText>
+                                        <MDBCardText className="text-muted">{new Date(userInfo.birthday).toLocaleDateString('en-GB')}</MDBCardText>
                                     </MDBCol>
                                     <MDBCol size="6" className="mb-3">
                                         <MDBTypography tag="h6">Cinsiyet</MDBTypography>
