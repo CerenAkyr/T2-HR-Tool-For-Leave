@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tr.com.t2.ik.model.Personnel;
 
 import java.util.Date;
 
@@ -12,9 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestCalendarDTO {
-    private String username;
-    private String firstname;
-    private String lastname;
+    private Personnel personnel;
     private Date startDate;
     private Date endDate;
 }

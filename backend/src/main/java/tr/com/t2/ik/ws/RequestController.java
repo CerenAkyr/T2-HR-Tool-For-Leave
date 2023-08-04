@@ -22,7 +22,6 @@ import tr.com.t2.ik.ws.dto.RequestDto;
 
 
 @RestController
-@RequestMapping("/api/off")
 public class RequestController {
 
     @Autowired
@@ -38,7 +37,7 @@ public class RequestController {
     private JwtTokenUtil jwtTokenUtil;
 
     @CrossOrigin
-    @PostMapping
+    @PostMapping("/api/off")
     public ResponseEntity<String> addOffRequest(@RequestBody RequestDto offRequest) {
         String username = offRequest.getUsername();
         System.out.println(username);
@@ -71,7 +70,7 @@ public class RequestController {
         }
     }
 
-    @GetMapping("/info")
+    @GetMapping("/calendar/info")
     @CrossOrigin
     public List<RequestCalendarDTO> getAllRequests() {
         return requestService.getAllRequests();
