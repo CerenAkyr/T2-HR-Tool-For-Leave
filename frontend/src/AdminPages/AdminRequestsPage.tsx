@@ -11,7 +11,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import StickyFooter from "../StickyFooter";
 import SideBar from "./AdminNavigation/SideBar";
-
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 
 
 
@@ -31,7 +31,7 @@ function AdminRequestsPage() {
     excuseEndDate: string,
     excuseType: string,
     requestStatus: string,
-    
+    description : string,
     
 }
 
@@ -152,7 +152,7 @@ type Personnel = {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: '#9f5cbe' }}>
-              <StickyNote2Icon />
+              <BookmarksIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ mb: 3 }} >
               Kullanıcı İzin İstek Listesi

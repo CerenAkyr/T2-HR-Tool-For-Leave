@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
+import PublishIcon from '@mui/icons-material/Publish';
 
 
 
@@ -61,7 +62,7 @@ function UserAddOffDay() {
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: '#9f5cbe' }}>
-          <StickyNote2Icon />
+          <PublishIcon />
         </Avatar>
         <Typography component="h1" variant="h5" sx={{ mb: 3 }} >
           İzin İsteği

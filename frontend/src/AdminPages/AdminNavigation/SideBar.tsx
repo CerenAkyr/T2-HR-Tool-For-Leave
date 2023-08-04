@@ -5,7 +5,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-
+import PeopleIcon from '@mui/icons-material/People';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
@@ -15,6 +15,10 @@ import RecentActorsOutlinedIcon from '@mui/icons-material/RecentActorsOutlined';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import Tooltip from '@mui/material/Tooltip';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import PublishIcon from '@mui/icons-material/Publish';
 
 interface MenuItem {
     title: string,
@@ -30,19 +34,19 @@ const sidebarItems: AdminSideBarMenu =
         {
             title: "İstekler",
             link: "/admin",
-            icon: StickyNote2Icon,
+            icon: BookmarksIcon,
             role: "admin"
         },
         {
             title: "Kullanıcılar",
             link: "/admin/users",
-            icon: RecentActorsOutlinedIcon,
+            icon: PeopleIcon,
             role: "admin"
         },
         {
             title: "Yeni Kullanıcı",
             link: "/admin/register-user",
-            icon: BadgeIcon,
+            icon: PersonAddIcon,
             role: "admin"
         },
         {
@@ -54,13 +58,13 @@ const sidebarItems: AdminSideBarMenu =
         {
             title: "Yeni İzin Formu",
             link: "/user/add-off-days",
-            icon: StickyNote2Icon,
+            icon: PublishIcon,
             role: "user"
         },
         {
             title: "Profil",
             link: "/user/view-profile",
-            icon: RecentActorsOutlinedIcon,
+            icon: ManageAccountsIcon,
             role: "user"
         },
     ]
