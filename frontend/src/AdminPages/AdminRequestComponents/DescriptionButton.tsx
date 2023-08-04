@@ -39,7 +39,7 @@ function DescriptionButton(props: DescriptionButtonProps) {
     const timeDifferenceInMilliseconds:number = endDate.getTime() - startDate.getTime();
     // Convert milliseconds to days
     const millisecondsPerDay = 1000 * 60 * 60 * 24; // Milliseconds in a day
-    const daysDifference = Math.floor(timeDifferenceInMilliseconds / millisecondsPerDay);
+    const daysDifference = Math.ceil(timeDifferenceInMilliseconds / millisecondsPerDay);
 
     return (
         <div>
